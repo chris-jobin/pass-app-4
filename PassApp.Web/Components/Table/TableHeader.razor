@@ -1,0 +1,26 @@
+﻿
+<thead class="bg-light">
+    <tr>
+        @foreach (var header in (Model?.Headers ?? Enumerable.Empty<TableHeaderModel>()))
+        {
+            @if (!string.IsNullOrEmpty(header.Name))
+            {
+                <th class="@(header.Column == TableHeaderModel.ColumnType.None ? "pointer" : "") user-selection-none" style="width:@(header.ColumnWidth);">
+                    <div @onclick="@(header.Column == TableHeaderModel.ColumnType.None ? (() => OnSort(Model.Headers.IndexOf(header))) : (() => { }))">
+                        @((MarkupString)header.Name)
+                        @if (header.Direction  != TableHeaderModel.SortDirection.None)
+                        {
+                            <span class="text-right p-1 oi oi-caret-@(header.Direction == TableHeaderModel.SortDirection.Ascending ? "top" : "bottom")"></span>
+                        }
+                    </div>
+                </th>
+            }
+            else
+            {
+                <th style="width:@(header.ColumnWidth);">
+
+                </th>
+            }
+        }
+    </tr>
+</thead>

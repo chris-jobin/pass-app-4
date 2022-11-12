@@ -1,0 +1,47 @@
+﻿@using PassApp.Web.Components.Buttons;
+
+<tbody>
+    @if (Model?.Headers?.Any(x => x.Filter != TableHeaderModel.FilterType.None) ?? false)
+    {
+        <tr>
+            @foreach (var header in Model.Headers)
+            {
+                <td>
+                    @if (header.Filter == TableHeaderModel.FilterType.Text)
+                    {
+                        <input class="form-control form-control-sm" @oninput="@((value) => OnFilterText(Model.Headers.IndexOf(header), value?.Value?.ToString()))" />
+                    }
+                </td>
+            }
+        </tr>
+    }
+    @foreach (var row in (Model?.Items ?? Enumerable.Empty<TableBodyModel>()))
+    {
+        <tr class="hover-table">
+            @foreach (var cell in (row?.Content ?? Enumerable.Empty<string>()))
+            {
+                <td class="table-content-overflow">
+                    @if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password)
+                    {
+                        <div class="m-0 p-0">
+                            <input type="password" class="form-control-plaintext" value="@cell" readonly disabled autocomplete="off" />
+                        </div>
+                    }
+                    else
+                    {
+                        @((MarkupString)cell)
+                    }
+                </td>
+            }
+            @if (Model?.StoredItems?.Any(x => x?.Buttons.Any() ?? false) ?? false)
+            {
+                <td class="text-right user-selection-none icon-button-no-wrap">
+                    @foreach (var button in (row?.Buttons ?? Enumerable.Empty<IconButtonModel>()))
+                    {
+                        <IconButton IconClass="@button.IconClass" IconText="@button.IconText" OnClick="@(() => OnClick(button?.Parameters))" /><span>&nbsp;</span>
+                    }
+                </td>
+            }
+        </tr>
+    }
+</tbody>

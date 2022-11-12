@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PassApp.Web.Components
+namespace PassApp.Web.Components.Buttons
 {
-    public partial class IconButton
+    public partial class Button
     {
         [Parameter]
-        public string IconClass { get; set; } = "oi oi-pencil text-primary";
+        public string BtnClass { get; set; } = "btn btn-primary";
+        [Parameter]
+        public string BtnText { get; set; } = "Button";
         [Parameter]
         public EventCallback<string[]> OnClick { get; set; }
-        [Parameter]
-        public string? IconText { get; set; }
         [Parameter]
         public string[]? Parameters { get; set; }
 
