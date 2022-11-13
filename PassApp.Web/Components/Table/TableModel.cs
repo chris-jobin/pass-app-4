@@ -46,7 +46,7 @@ namespace PassApp.Web.Components.Table
 
         public void Filter(int index, string? filterText)
         {
-            var sortedHeader = Headers?.SingleOrDefault(x => x.Direction == TableHeaderModel.SortDirection.None);
+            var sortedHeader = Headers?.SingleOrDefault(x => x.Direction != TableHeaderModel.SortDirection.None);
             if (sortedHeader != null)
                 sortedHeader.Direction = TableHeaderModel.SortDirection.None;
 
