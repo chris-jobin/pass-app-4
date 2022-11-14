@@ -37,9 +37,9 @@ namespace PassApp.Web.Components.Table
         public void SortHeader(TableHeaderModel header, int index)
         {
             if (header.Direction == TableHeaderModel.SortDirection.Ascending)
-                DisplayItems = DisplayItems?.OrderBy(x => x.Content?[index]).ToList();
+                DisplayItems = DisplayItems?.OrderBy(x => x.Content?[index]?.Text).ToList();
             else if (header.Direction == TableHeaderModel.SortDirection.Descending)
-                DisplayItems = DisplayItems?.OrderByDescending(x => x.Content?[index]).ToList();
+                DisplayItems = DisplayItems?.OrderByDescending(x => x.Content?[index]?.Text).ToList();
             else
                 DisplayItems = StoredItems?.Intersect(DisplayItems ?? Enumerable.Empty<TableBodyModel>()).ToList();
         }
@@ -64,9 +64,9 @@ namespace PassApp.Web.Components.Table
             {
                 if (Headers[i].Filter == TableHeaderModel.FilterType.Text && !string.IsNullOrEmpty(Headers[i].FilterText))
                 {
-                    for (int j = 0; j < filteredItems.Count; j++)
+                    for (int j = 0; j < (filteredItems?.Count ?? 0); j++)
                     {
-                        var description = filteredItems?[j]?.Content?[i]?.Trim()?.ToLower();
+                        var description = filteredItems?[j]?.Content?[i]?.Text?.Trim()?.ToLower();
                         var headerFilterText = Headers[i]?.FilterText?.ToLower();
 
                         if (description != null && headerFilterText != null)
@@ -86,7 +86,7 @@ namespace PassApp.Web.Components.Table
             }
 
             if (!string.IsNullOrEmpty(header.FilterText)) 
-                filteredItems = filteredItems.OrderByDescending(x => x.Content[index]?.ToLower()?.StartsWith(header.FilterText.ToLower())).ToList();
+                filteredItems = filteredItems?.OrderByDescending(x => x.Content[index]?.Text?.ToLower()?.StartsWith(header.FilterText.ToLower())).ToList();
 
             DisplayItems = filteredItems;
 

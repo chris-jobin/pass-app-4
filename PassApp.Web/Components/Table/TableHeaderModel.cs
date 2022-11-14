@@ -33,6 +33,7 @@ namespace PassApp.Web.Components.Table
         public enum ColumnType
         {
             None,
+            Link,
             Email,
             Password
         }

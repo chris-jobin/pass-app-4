@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace PassApp.Web.Components.Table
 {
-    public class TableBodyModel
+    public class TableCellModel
     {
         public string? Id { get; set; }
-        public List<TableCellModel>? Content { get; set; }
-        public List<IconButtonModel>? Buttons { get; set; }
+        public string? Text { get; set; }
+        public ButtonModel? Button { get; set; }
+        public string? Link { get; set; }
+        public bool ShowButton { get; set; }
     }
 }

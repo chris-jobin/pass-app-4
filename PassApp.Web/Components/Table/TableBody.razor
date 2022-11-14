@@ -18,18 +18,43 @@
     @foreach (var row in (Model?.Items ?? Enumerable.Empty<TableBodyModel>()))
     {
         <tr class="hover-table">
-            @foreach (var cell in (row?.Content ?? Enumerable.Empty<string>()))
+            @foreach (var cell in (row?.Content ?? Enumerable.Empty<TableCellModel>()))
             {
                 <td class="table-content-overflow">
-                    @if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password)
+                    @if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Link)
                     {
-                        <div class="m-0 p-0">
-                            <input type="password" class="form-control-plaintext m-0 p-0" value="@cell" readonly disabled autocomplete="off" />
+                        @if (string.IsNullOrEmpty(cell.Link))
+                        {
+                            @((MarkupString)(cell.Text ?? string.Empty))
+                        }
+                        else
+                        {
+                            <a href="@(cell.Link)" target="_blank">@cell.Text</a>
+                        }
+                    }
+                    else if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Email || Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password)
+                    {
+                        <div class="m-0 p-0" @onmouseover="@(() => cell.ShowButton = true)" @onmouseleave="@(() => cell.ShowButton = false)">
+                            @if (cell.ShowButton)
+                            {
+                                <Button BtnClass="@cell.Button?.BtnClass" BtnText="@cell.Button?.BtnText" OnClick="@(() => CopyToClipboard(cell.Button?.Parameters?[0] ?? string.Empty))" />
+                            }
+                            else
+                            {
+                                @if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password)
+                                {
+                                    <input type="password" class="form-control-plaintext m-0 p-0" value="@cell.Text" readonly disabled autocomplete="off" />
+                                }
+                                else
+                                {
+                                    @((MarkupString)(cell.Text ?? string.Empty))                                    
+                                }
+                            }
                         </div>
                     }
                     else
                     {
-                        @((MarkupString)cell)
+                        @((MarkupString)(cell.Text ?? string.Empty))                        
                     }
                 </td>
             }

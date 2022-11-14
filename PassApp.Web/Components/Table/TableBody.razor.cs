@@ -32,9 +32,15 @@ namespace PassApp.Web.Components.Table
             Table?.Refresh();
         }
 
-        protected async Task CopyPassword(string password)
+        protected async Task CopyToClipboard(string text)
         {
-            await Js.InvokeVoidAsync("CopyToClipboard", password);
+            await Js.InvokeVoidAsync("CopyToClipboard", text);
+        }
+
+        protected async Task ShowButton(TableCellModel cell)
+        {
+            cell.ShowButton = true;
+            await Task.Yield();
         }
     }
 }
