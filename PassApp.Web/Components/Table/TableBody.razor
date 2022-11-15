@@ -20,9 +20,9 @@
         <tr class="hover-table">
             @foreach (var cell in (row?.Content ?? Enumerable.Empty<TableCellModel>()))
             {
-                <td class="table-content-overflow">
-                    @if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Link)
-                    {
+                @if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Link)
+                {
+                    <td class="table-content-overflow">
                         @if (string.IsNullOrEmpty(cell.Link))
                         {
                             @((MarkupString)(cell.Text ?? string.Empty))
@@ -31,32 +31,34 @@
                         {
                             <a href="@(cell.Link)" target="_blank">@cell.Text</a>
                         }
-                    }
-                    else if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Email || Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password)
-                    {
-                        <div class="m-0 p-0" @onmouseover="@(() => cell.ShowButton = true)" @onmouseleave="@(() => cell.ShowButton = false)">
-                            @if (cell.ShowButton)
+                    </td>
+                }
+                else if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Email || Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password)
+                {
+                    <td class="table-content-overflow" @onmouseover="@(() => cell.ShowButton = true)" @onmouseleave="@(() => cell.ShowButton = false)">
+                        @if (cell.ShowButton)
+                        {
+                            <Button BtnClass="@cell.Button?.BtnClass" BtnText="@cell.Button?.BtnText" OnClick="@(() => CopyToClipboard(cell.Button?.Parameters?[0] ?? string.Empty))" />
+                        }
+                        else
+                        {
+                            @if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password)
                             {
-                                <Button BtnClass="@cell.Button?.BtnClass" BtnText="@cell.Button?.BtnText" OnClick="@(() => CopyToClipboard(cell.Button?.Parameters?[0] ?? string.Empty))" />
+                                <input type="password" class="form-control-plaintext m-0 p-0" value="@cell.Text" readonly disabled autocomplete="off" />
                             }
                             else
                             {
-                                @if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password)
-                                {
-                                    <input type="password" class="form-control-plaintext m-0 p-0" value="@cell.Text" readonly disabled autocomplete="off" />
-                                }
-                                else
-                                {
-                                    @((MarkupString)(cell.Text ?? string.Empty))                                    
-                                }
+                                @((MarkupString)(cell.Text ?? string.Empty))
                             }
-                        </div>
-                    }
-                    else
-                    {
-                        @((MarkupString)(cell.Text ?? string.Empty))                        
-                    }
-                </td>
+                        }
+                    </td>
+                }
+                else
+                {
+                    <td class="table-content-overflow">
+                        @((MarkupString)(cell.Text ?? string.Empty))
+                    </td>
+                }
             }
             @if (Model?.StoredItems?.Any(x => x?.Buttons?.Any() ?? false) ?? false)
             {
