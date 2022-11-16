@@ -34,7 +34,7 @@ namespace PassApp.Web.Components.Table
         {
             None,
             Link,
-            Email,
+            Button,
             Password
         }
 

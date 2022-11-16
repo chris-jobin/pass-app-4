@@ -11,7 +11,6 @@ namespace PassApp.Web.Components.Table
     {
         public string? Id { get; set; }
         public string? Text { get; set; }
-        public ButtonModel? Button { get; set; }
         public string? Link { get; set; }
         public bool ShowButton { get; set; }
     }

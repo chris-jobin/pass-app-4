@@ -33,18 +33,18 @@
                         }
                     </td>
                 }
-                else if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Email || Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password)
+                else if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Button || Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password)
                 {
                     <td class="table-content-overflow" @onmouseover="@(() => cell.ShowButton = true)" @onmouseleave="@(() => cell.ShowButton = false)">
                         @if (cell.ShowButton)
                         {
-                            <Button BtnClass="@cell.Button?.BtnClass" BtnText="@cell.Button?.BtnText" OnClick="@(() => CopyToClipboard(cell.Button?.Parameters?[0] ?? string.Empty))" />
+                            <Button BtnClass="btn btn-outline-primary btn-sm" BtnText="Copy" OnClick="@(() => CopyToClipboard(cell.Text ?? string.Empty))" />
                         }
                         else
                         {
                             @if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password)
                             {
-                                <input type="password" class="form-control-plaintext m-0 p-0" value="@cell.Text" readonly disabled autocomplete="off" />
+                                @(new string('•', (cell.Text?.Length ?? 0)))
                             }
                             else
                             {
