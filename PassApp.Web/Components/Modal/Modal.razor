@@ -1,0 +1,23 @@
+﻿
+@if (Show)
+{
+    <div class="modal show d-block" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-@Size modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="py-1 modal-header">
+                    <div class="col text-right p-0">
+                        <button class="btn btn-outline-danger" @onclick="Close">×</button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    @ChildContent
+                </div>
+                <div class="py-1 modal-footer">
+                    <button class="btn btn-secondary" @onclick="Close">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop show"></div>
+}
