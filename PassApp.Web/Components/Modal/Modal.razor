@@ -6,14 +6,24 @@
             <div class="modal-content">
                 <div class="py-1 modal-header">
                     <div class="col text-right p-0">
-                        <button class="btn btn-outline-danger" @onclick="Close">×</button>
+                        <button class="btn btn-outline-danger" disabled="@IsOperating" @onclick="Close">×</button>
                     </div>
                 </div>
                 <div class="modal-body">
                     @ChildContent
                 </div>
                 <div class="py-1 modal-footer">
-                    <button class="btn btn-secondary" @onclick="Close">Close</button>
+                    <button class="btn btn-secondary" disabled="@IsOperating" @onclick="Close">Close</button>
+                    @if (Save.HasDelegate)
+                    {
+                        <button class="btn btn-primary" disabled="@IsOperating" @onclick="OnSave">
+                            @if (IsOperating)
+                            {
+                                <span class="spinner-border spinner-border-sm"></span>
+                            }
+                            Save
+                        </button>
+                    }
                 </div>
             </div>
         </div>

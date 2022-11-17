@@ -13,8 +13,11 @@ namespace PassApp.Web.Components.Modal
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
         public string Size { get; set; } = "xl";
+        [Parameter]
+        public EventCallback Save { get; set; }
 
         public bool Show { get; set; }
+        public bool IsOperating { get; set; }
 
         public void Open()
         {
@@ -25,6 +28,20 @@ namespace PassApp.Web.Components.Modal
         public void Close()
         {
             Show = false;
+            StateHasChanged();
+        }
+
+        protected async Task OnSave()
+        {
+            Operate();
+            if (Save.HasDelegate)
+                await Save.InvokeAsync();
+            Operate();
+        }
+
+        protected void Operate()
+        {
+            IsOperating = !IsOperating;
             StateHasChanged();
         }
     }
