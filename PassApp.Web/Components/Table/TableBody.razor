@@ -17,7 +17,7 @@
     }
     @foreach (var row in (Model?.Items ?? Enumerable.Empty<TableBodyModel>()))
     {
-        <tr class="hover-table">
+        <tr class="align-middle hover-table">
             @foreach (var cell in (row?.Content ?? Enumerable.Empty<TableCellModel>()))
             {
                 @if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Link)
