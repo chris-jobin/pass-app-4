@@ -12,7 +12,7 @@ namespace PassApp.Web.Components.Modal
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
-        public string Size { get; set; } = "xl";
+        public string Size { get; set; } = "lg";
         [Parameter]
         public EventCallback Save { get; set; }
 

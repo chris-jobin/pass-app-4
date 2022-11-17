@@ -1,5 +1,50 @@
-﻿<h3>ItemForm</h3>
-
-@code {
-
+﻿
+@if (Model != null)
+{
+    <div class="container">
+        <div class="row">
+            <div>
+                <div class="row py-1">
+                    <div class="col-lg-4">
+                        <span class="fw-bold">Category</span>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" @bind-value="Model.Category" />
+                    </div>
+                </div>
+                <div class="row py-1">
+                    <div class="col-lg-4">
+                        <span class="fw-bold">Title</span>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" @bind-value="Model.Title" />
+                    </div>
+                </div>
+                <div class="row py-1">
+                    <div class="col-lg-4">
+                        <span class="fw-bold">Link</span>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" @bind-value="Model.Link" />
+                    </div>
+                </div>
+                <div class="row py-1">
+                    <div class="col-lg-4">
+                        <span class="fw-bold">Username</span>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" @bind-value="Model.Username" />
+                    </div>
+                </div>
+                <div class="row py-1">
+                    <div class="col-lg-4">
+                        <span class="fw-bold">Email</span>
+                    </div>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" @bind-value="Model.Email" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
