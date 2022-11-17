@@ -1,4 +1,5 @@
 ﻿@using PassApp.Web.Components.Buttons;
+@using PassApp.Web.Components.Shared
 
 <tbody>
     @if (Model?.Headers?.Any(x => x.Filter != TableHeaderModel.FilterType.None) ?? false)
@@ -9,7 +10,17 @@
                 <td>
                     @if (header.Filter == TableHeaderModel.FilterType.Text)
                     {
-                        <input class="form-control form-control-sm" @oninput="@((value) => OnFilterText(Model.Headers.IndexOf(header), value?.Value?.ToString()))" />
+                        <input class="form-control form-control-sm" @oninput="@((value) => OnFilterText(Model?.Headers.IndexOf(header) ?? 0, value?.Value?.ToString()))" />
+                    }
+                    @if (header.Filter == TableHeaderModel.FilterType.DropDown)
+                    {
+                        <select class="form-control form-control-sm" @onchange="@((value) => OnFilterText(Model?.Headers.IndexOf(header) ?? 0, value?.Value?.ToString()))">
+                            <option value=""></option>
+                            @foreach (var item in Model?.GetColumnItems(Model.Headers.IndexOf(header)) ?? Enumerable.Empty<ItemModel>())
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
                     }
                 </td>
             }

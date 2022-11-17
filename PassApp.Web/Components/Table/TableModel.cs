@@ -1,4 +1,5 @@
 ﻿using PassApp.Web.Components.Buttons;
+using PassApp.Web.Components.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,7 +63,7 @@ namespace PassApp.Web.Components.Table
 
             for (int i = 0; i < Headers?.Count; i++)
             {
-                if (Headers[i].Filter == TableHeaderModel.FilterType.Text && !string.IsNullOrEmpty(Headers[i].FilterText))
+                if (!string.IsNullOrEmpty(Headers[i].FilterText))
                 {
                     for (int j = 0; j < (filteredItems?.Count ?? 0); j++)
                     {
@@ -71,17 +72,14 @@ namespace PassApp.Web.Components.Table
 
                         if (description != null && headerFilterText != null)
                         {
-                            if (!description.Contains(headerFilterText))
+                            if ((Headers[i].Filter == TableHeaderModel.FilterType.Text && !description.Contains(headerFilterText)) ||
+                                Headers[i].Filter == TableHeaderModel.FilterType.DropDown && description != headerFilterText)
                             {
                                 filteredItems?.RemoveAt(j);
                                 j--;
                             }
                         }
                     }
-                }
-                else if (Headers[i].Filter == TableHeaderModel.FilterType.DropDown)
-                {
-                    // TODO
                 }
             }
 
@@ -92,6 +90,16 @@ namespace PassApp.Web.Components.Table
 
             if (CurrentPage > NumberOfPages)
                 ChangePage(NumberOfPages);
+        }
+
+        public List<ItemModel>? GetColumnItems(int index)
+        {
+            var columnItems = StoredItems?.Where(x => !string.IsNullOrEmpty(x.Content?[index].Text)).Select(x => x.Content?[index].Text).ToList();
+            return columnItems?.Select(x => new ItemModel
+            {
+                Id = x,
+                Name = x
+            }).ToList();
         }
 
         public void ChangePage(int page)
