@@ -1,72 +1,71 @@
-﻿
+﻿@using PassApp.Web.Components.Modal
+
 @if (Model != null)
 {
     <div class="container">
-        <div class="row">
-            <div>
-                <div class="row py-1">
-                    <div class="col-lg-4">
-                        <span class="fw-bold">Category</span>
-                    </div>
-                    <div class="col-lg-8">
-                        <input type="text" class="form-control" @bind-value="Model.Category" />
-                    </div>
-                </div>
-                <div class="row py-1">
-                    <div class="col-lg-4">
-                        <span class="fw-bold">Title</span>
-                    </div>
-                    <div class="col-lg-8">
-                        <input type="text" class="form-control" @bind-value="Model.Title" />
-                    </div>
-                </div>
-                <div class="row py-1">
-                    <div class="col-lg-4">
-                        <span class="fw-bold">Link</span>
-                    </div>
-                    <div class="col-lg-8">
-                        <input type="text" class="form-control" @bind-value="Model.Link" />
-                    </div>
-                </div>
-                <div class="row py-1">
-                    <div class="col-lg-4">
-                        <span class="fw-bold">Username</span>
-                    </div>
-                    <div class="col-lg-8">
-                        <input type="text" class="form-control" @bind-value="Model.Username" />
-                    </div>
-                </div>
-                <div class="row py-1">
-                    <div class="col-lg-4">
-                        <span class="fw-bold">Email</span>
-                    </div>
-                    <div class="col-lg-8">
-                        <input type="text" class="form-control" @bind-value="Model.Email" />
-                    </div>
-                </div>
-                <div class="row py-1">
-                    <div class="col-lg-4">
-                        <span class="fw-bold">Password</span>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="input-group">
-                            <input type="@InputType" class="form-control" @bind-value="Model.Password" />
-                            <button class="btn btn-outline-secondary" @onmousedown="@(() => ShowPassword = true)" @onmouseup="@(() => ShowPassword = false)">
-                                <span class="oi oi-eye"></span>
-                            </button>
-                            <button class="btn btn-outline-primary">
-                                <span class="oi oi-pencil"></span>
-                            </button>
+        <div class="row py-1">
+            <div class="col-lg-4">
+                <span class="fw-bold">Category</span>
+            </div>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" @bind-value="Model.Category" />
+            </div>
+        </div>
+        <div class="row py-1">
+            <div class="col-lg-4">
+                <span class="fw-bold">Title</span>
+            </div>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" @bind-value="Model.Title" />
+            </div>
+        </div>
+        <div class="row py-1">
+            <div class="col-lg-4">
+                <span class="fw-bold">Link</span>
+            </div>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" @bind-value="Model.Link" />
+            </div>
+        </div>
+        <div class="row py-1">
+            <div class="col-lg-4">
+                <span class="fw-bold">Username</span>
+            </div>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" @bind-value="Model.Username" />
+            </div>
+        </div>
+        <div class="row py-1">
+            <div class="col-lg-4">
+                <span class="fw-bold">Email</span>
+            </div>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" @bind-value="Model.Email" />
+            </div>
+        </div>
+        <div class="row py-1">
+            <div class="col-lg-4">
+                <span class="fw-bold">Password</span>
+            </div>
+            <div class="col-lg-8">
+                <div class="input-group">
+                    <input type="@InputType" class="form-control" @bind-value="Model.Password" />
+                    <button class="btn btn-outline-secondary" @onmousedown="@(() => ShowPassword = true)" @onmouseup="@(() => ShowPassword = false)">
+                        <span class="oi oi-eye"></span>
+                    </button>
+                    <button class="btn btn-outline-primary" @onclick="CopyToClipboard">
+                        <span class="oi oi-clipboard"></span>
+                    </button>
+                    <button class="btn btn-outline-success" @onclick="@(() => ModalRef?.Open())">
+                        <span class="oi oi-reload"></span>
+                    </button>
 
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
-}
 
-@code {
-    public bool ShowPassword { get; set; }
-    public string InputType => ShowPassword ? "text" : "password";
+    <Modal @ref="ModalRef" Size="md" Save="SavePassword">
+        <PasswordForm @ref="FormRef" />
+    </Modal>
 }

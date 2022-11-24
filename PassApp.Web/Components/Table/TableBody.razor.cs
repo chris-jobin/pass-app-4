@@ -34,6 +34,7 @@ namespace PassApp.Web.Components.Table
 
         protected async Task CopyToClipboard(string text)
         {
+            text ??= "";
             await Js.InvokeVoidAsync("CopyToClipboard", text);
         }
     }
