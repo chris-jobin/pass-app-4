@@ -1,82 +1,89 @@
 ﻿@using PassApp.Web.Components.Modal
+@using PassApp.Web.Components.Validation
 
 @if (Model != null)
 {
-    <div class="container">
-        <div class="row py-1">
-            <div class="col-lg-4">
-                <span class="fw-bold">Category</span>
+    <ValidationForm @ref="Context">
+        <div class="container">
+            <div class="row py-1">
+                <div class="col-lg-4">
+                    <span class="fw-bold">Category</span>
+                </div>
+                <div class="col-lg-8">
+                    <div class="input-group">
+                        <input type="text" autocomplete="on" class="form-control" @bind-value="Model.Category" />
+                        <button class="btn btn-outline-secondary">
+                            <span class="oi oi-list"></span>
+                        </button>
+                    </div>
+                    <ValidationComponent For="@(() => Model.Category)" />
+                </div>
             </div>
-            <div class="col-lg-8">
-                <div class="input-group">
-                    <input type="text" autocomplete="on" class="form-control" @bind-value="Model.Category" />
-                    <button class="btn btn-outline-secondary">
-                        <span class="oi oi-list"></span>
-                    </button>
+            <div class="row py-1">
+                <div class="col-lg-4">
+                    <span class="fw-bold">Title</span>
+                </div>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" @bind-value="Model.Title" />
+                    <ValidationComponent For="@(() => Model.Title)" />
+                </div>
+            </div>
+            <div class="row py-1">
+                <div class="col-lg-4">
+                    <span class="fw-bold">Link</span>
+                </div>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" @bind-value="Model.Link" />
+                </div>
+            </div>
+            <div class="row py-1">
+                <div class="col-lg-4">
+                    <span class="fw-bold">Username</span>
+                </div>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" @bind-value="Model.Username" />
+                    <ValidationComponent For="@(() => Model.Username)" />
+                </div>
+            </div>
+            <div class="row py-1">
+                <div class="col-lg-4">
+                    <span class="fw-bold">Email</span>
+                </div>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" @bind-value="Model.Email" />
+                        <ValidationComponent For="@(() => Model.Email)" />
+                </div>
+            </div>
+            <div class="row py-1">
+                <div class="col-lg-4">
+                    <span class="fw-bold">Password</span>
+                </div>
+                <div class="col-lg-8">
+                    <div class="input-group">
+                        <input type="@InputType" class="form-control" @bind-value="Model.Password" />
+                        <button class="btn btn-outline-secondary" @onmousedown="@(() => ShowPassword = true)" @onmouseup="@(() => ShowPassword = false)">
+                            <span class="oi oi-eye"></span>
+                        </button>
+                        <button class="btn btn-outline-primary" @onclick="CopyToClipboard">
+                            <span class="oi oi-clipboard"></span>
+                        </button>
+                        <button class="btn btn-outline-success" @onclick="@(() => ModalRef?.Open())">
+                            <span class="oi oi-reload"></span>
+                        </button>
+                    </div>
+                    <ValidationComponent For="@(() => Model.Password)" />
+                </div>
+            </div>
+            <div class="row py-1">
+                <div class="col-lg-4">
+                    <span class="fw-bold">Notes</span>
+                </div>
+                <div class="col-lg-8">
+                    <textarea class="form-control" @bind="Model.Notes" />
                 </div>
             </div>
         </div>
-        <div class="row py-1">
-            <div class="col-lg-4">
-                <span class="fw-bold">Title</span>
-            </div>
-            <div class="col-lg-8">
-                <input type="text" class="form-control" @bind-value="Model.Title" />
-            </div>
-        </div>
-        <div class="row py-1">
-            <div class="col-lg-4">
-                <span class="fw-bold">Link</span>
-            </div>
-            <div class="col-lg-8">
-                <input type="text" class="form-control" @bind-value="Model.Link" />
-            </div>
-        </div>
-        <div class="row py-1">
-            <div class="col-lg-4">
-                <span class="fw-bold">Username</span>
-            </div>
-            <div class="col-lg-8">
-                <input type="text" class="form-control" @bind-value="Model.Username" />
-            </div>
-        </div>
-        <div class="row py-1">
-            <div class="col-lg-4">
-                <span class="fw-bold">Email</span>
-            </div>
-            <div class="col-lg-8">
-                <input type="text" class="form-control" @bind-value="Model.Email" />
-            </div>
-        </div>
-        <div class="row py-1">
-            <div class="col-lg-4">
-                <span class="fw-bold">Password</span>
-            </div>
-            <div class="col-lg-8">
-                <div class="input-group">
-                    <input type="@InputType" class="form-control" @bind-value="Model.Password" />
-                    <button class="btn btn-outline-secondary" @onmousedown="@(() => ShowPassword = true)" @onmouseup="@(() => ShowPassword = false)">
-                        <span class="oi oi-eye"></span>
-                    </button>
-                    <button class="btn btn-outline-primary" @onclick="CopyToClipboard">
-                        <span class="oi oi-clipboard"></span>
-                    </button>
-                    <button class="btn btn-outline-success" @onclick="@(() => ModalRef?.Open())">
-                        <span class="oi oi-reload"></span>
-                    </button>
-
-                </div>
-            </div>
-        </div>
-        <div class="row py-1">
-            <div class="col-lg-4">
-                <span class="fw-bold">Notes</span>
-            </div>
-            <div class="col-lg-8">
-                <textarea class="form-control" @bind="Model.Notes" />
-            </div>
-        </div>
-    </div>
+    </ValidationForm>
 
     <Modal @ref="ModalRef" Size="md" Save="SavePassword">
         <PasswordForm @ref="FormRef" />

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using PassApp.Web.Components.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace PassApp.Web.Components.Form
         public IJSRuntime Js { get; set; }
 
         public ItemFormModel? Model { get; set; }
+        public ValidationForm? Context { get; set; }
         public Modal.Modal? ModalRef { get; set; }
         public PasswordForm? FormRef { get; set; }
 
