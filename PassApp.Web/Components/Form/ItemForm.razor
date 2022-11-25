@@ -8,7 +8,12 @@
                 <span class="fw-bold">Category</span>
             </div>
             <div class="col-lg-8">
-                <input type="text" class="form-control" @bind-value="Model.Category" />
+                <div class="input-group">
+                    <input type="text" autocomplete="on" class="form-control" @bind-value="Model.Category" />
+                    <button class="btn btn-outline-secondary">
+                        <span class="oi oi-list"></span>
+                    </button>
+                </div>
             </div>
         </div>
         <div class="row py-1">
@@ -61,6 +66,14 @@
                     </button>
 
                 </div>
+            </div>
+        </div>
+        <div class="row py-1">
+            <div class="col-lg-4">
+                <span class="fw-bold">Notes</span>
+            </div>
+            <div class="col-lg-8">
+                <textarea class="form-control" @bind="Model.Notes" />
             </div>
         </div>
     </div>

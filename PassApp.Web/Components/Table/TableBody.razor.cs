@@ -32,10 +32,6 @@ namespace PassApp.Web.Components.Table
             Table?.Refresh();
         }
 
-        protected async Task CopyToClipboard(string text)
-        {
-            text ??= "";
-            await Js.InvokeVoidAsync("CopyToClipboard", text);
-        }
+        protected async Task CopyToClipboard(string text) => await Js.InvokeVoidAsync("navigator.clipboard.writeText", text ?? "");
     }
 }

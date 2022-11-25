@@ -22,9 +22,6 @@ namespace PassApp.Web.Components.Form
             await Task.Yield();
         }
 
-        protected async Task CopyToClipboard()
-        {
-            await Js.InvokeVoidAsync("CopyToClipboard", Model?.Password ?? "");
-        }
+        protected async Task CopyToClipboard() => await Js.InvokeVoidAsync("navigator.clipboard.writeText", Model?.Password ?? "");
     }
 }

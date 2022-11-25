@@ -24,13 +24,16 @@ namespace PassApp.Web.Components.Form
         protected override async Task OnInitializedAsync()
         {
             Model = new();
+            Model.Categories = new List<string>
+            {
+                "General",
+                "Banking",
+                "Social"
+            };
             await Task.Yield();
         }
 
-        protected async Task CopyToClipboard()
-        {
-            await Js.InvokeVoidAsync("CopyToClipboard", Model?.Password ?? "");
-        }
+        protected async Task CopyToClipboard() => await Js.InvokeVoidAsync("navigator.clipboard.writeText", Model?.Password ?? "");
 
         protected async Task SavePassword()
         {
