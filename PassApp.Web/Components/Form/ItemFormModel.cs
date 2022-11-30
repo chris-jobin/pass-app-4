@@ -24,12 +24,13 @@ namespace PassApp.Web.Components.Form
         public string? Link { get; set; }
 
         [DisplayValidation("Username")]
-        [StringValidation("Username is required.")]
         public string? Username { get; set; }
 
         [DisplayValidation("Email")]
-        [StringValidation("Email is required.")]
         public string? Email { get; set; }
+
+        [ConditionalValidation("Username or Email is required.")]
+        public bool UsernameEmail => !string.IsNullOrEmpty(Username) || !string.IsNullOrEmpty(Email);
 
         [DisplayValidation("Password")]
         [StringValidation("Password is required.")]

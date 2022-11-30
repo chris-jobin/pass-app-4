@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-lg-8">
                     <input type="text" class="form-control" @bind-value="Model.Username" />
-                    <ValidationComponent For="@(() => Model.Username)" />
+                    <ValidationComponent For="@(() => Model.UsernameEmail)" />
                 </div>
             </div>
             <div class="row py-1">
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-lg-8">
                     <input type="text" class="form-control" @bind-value="Model.Email" />
-                    <ValidationComponent For="@(() => Model.Email)" />
+                    <ValidationComponent For="@(() => Model.UsernameEmail)" />
                 </div>
             </div>
             <div class="row py-1">

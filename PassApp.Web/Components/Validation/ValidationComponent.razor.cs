@@ -82,6 +82,8 @@ namespace PassApp.Web.Components.Validation
             {
                 if (attr is StringValidationAttribute)
                     IsValid = ValidateStringValidation(attr as StringValidationAttribute, value as string) && IsValid;
+                if (attr is ConditionalValidationAttribute)
+                    IsValid = ValidateConditionalValidation(attr as ConditionalValidationAttribute, value as bool?) && IsValid;
             }
 
             StateHasChanged();
@@ -94,6 +96,17 @@ namespace PassApp.Web.Components.Validation
             var isvalid = true;
             isvalid = !string.IsNullOrEmpty(value) && isvalid;
             isvalid = !string.IsNullOrWhiteSpace(value) && isvalid;
+
+            if (!isvalid)
+                ErrorMessage = attr.ErrorMessage;
+
+            return isvalid;
+        }
+
+        private bool ValidateConditionalValidation(ConditionalValidationAttribute attr, bool? value)
+        {
+            var isvalid = true;
+            isvalid = (value as bool? ?? false) && isvalid;
 
             if (!isvalid)
                 ErrorMessage = attr.ErrorMessage;
