@@ -22,7 +22,6 @@ namespace PassApp.Web.Components.Form
 
         public bool ShowCategoryDropDown { get; set; }
         public bool ShowPassword { get; set; }
-        public string InputType => ShowPassword ? "text" : "password";
 
         protected override async Task OnInitializedAsync()
         {

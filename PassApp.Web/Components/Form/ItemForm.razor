@@ -23,14 +23,14 @@
                                     }
                                     else
                                     {
-                                        <option value="@cat">@cat</option>                                        
+                                        <option value="@cat">@cat</option>
                                     }
                                 }
                             </select>
                         }
                         else
                         {
-                            <input type="text" autocomplete="on" class="form-control" @bind-value="Model.Category" />                            
+                            <input type="text" autocomplete="on" class="form-control" @bind-value="Model.Category" />
                         }
                         <button class="btn @(ShowCategoryDropDown ? "btn-secondary" : "btn-outline-secondary")" @onclick="ToggleCategory">
                             <span class="oi oi-list"></span>
@@ -80,7 +80,14 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="input-group">
-                        <input type="@InputType" class="form-control" @bind-value="Model.Password" />
+                        @if (ShowPassword)
+                        {
+                            <input type="text" class="form-control" @bind-value="Model.Password" />
+                        }
+                        else
+                        {
+                            <input type="password" class="form-control" @bind-value="Model.Password" />
+                        }
                         <button class="btn btn-outline-secondary" @onmousedown="@(() => ShowPassword = true)" @onmouseup="@(() => ShowPassword = false)">
                             <span class="oi oi-eye"></span>
                         </button>
