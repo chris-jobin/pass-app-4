@@ -1,0 +1,11 @@
+﻿.unset-all {
+    all: unset;
+}
+
+.pointer:hover {
+    cursor: pointer;
+}
+
+.hover-dim:hover {
+    filter: brightness(0.8);
+}
