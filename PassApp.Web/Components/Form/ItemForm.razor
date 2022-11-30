@@ -11,8 +11,28 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="input-group">
-                        <input type="text" autocomplete="on" class="form-control" @bind-value="Model.Category" />
-                        <button class="btn btn-outline-secondary">
+                        @if (ShowCategoryDropDown)
+                        {
+                            <select class="form-select" @bind="Model.Category">
+                                @foreach (var cat in Model.Categories ?? Enumerable.Empty<string>())
+                                {
+                                    <option value="" selected disabled hidden>Select</option>
+                                    @if (Model.Category == cat)
+                                    {
+                                        <option value="@cat" selected>@cat</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@cat">@cat</option>                                        
+                                    }
+                                }
+                            </select>
+                        }
+                        else
+                        {
+                            <input type="text" autocomplete="on" class="form-control" @bind-value="Model.Category" />                            
+                        }
+                        <button class="btn @(ShowCategoryDropDown ? "btn-secondary" : "btn-outline-secondary")" @onclick="ToggleCategory">
                             <span class="oi oi-list"></span>
                         </button>
                     </div>

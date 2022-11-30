@@ -20,6 +20,7 @@ namespace PassApp.Web.Components.Form
         public Modal.Modal? ModalRef { get; set; }
         public PasswordForm? FormRef { get; set; }
 
+        public bool ShowCategoryDropDown { get; set; }
         public bool ShowPassword { get; set; }
         public string InputType => ShowPassword ? "text" : "password";
 
@@ -32,6 +33,14 @@ namespace PassApp.Web.Components.Form
                 "Banking",
                 "Social"
             };
+            await Task.Yield();
+        }
+
+        protected async Task ToggleCategory()
+        {
+            ShowCategoryDropDown= !ShowCategoryDropDown;
+            Model.Category = "";
+            StateHasChanged();
             await Task.Yield();
         }
 
