@@ -1,4 +1,4 @@
-﻿using PassApp.Web.Components.Validation;
+﻿using PassApp.Web.Components.Validation.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,23 +11,31 @@ namespace PassApp.Web.Components.Form
     {
         public string? Id { get; set; }
 
-        [Validate("Category", Required = true)]
+        [DisplayValidation("Category")]
+        [StringValidation("Category is required.")]
         public string? Category { get; set; }
         public List<string>? Categories { get; set; }
 
-        [Validate("Title", Required = true)]
+        [DisplayValidation("Title")]
+        [StringValidation("Title is required.")]
         public string? Title { get; set; }
 
+        [DisplayValidation("Link")]
         public string? Link { get; set; }
 
-        [Validate("Username", Required = true)]
+        [DisplayValidation("Username")]
+        [StringValidation("Username is required.")]
         public string? Username { get; set; }
 
-        [Validate("Email", Required = true)]
+        [DisplayValidation("Email")]
+        [StringValidation("Email is required.")]
         public string? Email { get; set; }
 
-        [Validate("Password", Required = true)]
+        [DisplayValidation("Password")]
+        [StringValidation("Password is required.")]
         public string? Password { get; set; }
+
+        [DisplayValidation("Notes")]
         public string? Notes { get; set; }
     }
 }

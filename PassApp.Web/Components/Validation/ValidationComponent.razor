@@ -1,5 +1,5 @@
 ﻿
-@if (IsError)
+@if (!IsValid)
 {
-    <small class="text-danger">@ErrorMessage</small>
+    <small class="validation-message">@ErrorMessage</small>
 }

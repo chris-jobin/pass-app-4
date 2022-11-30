@@ -10,6 +10,8 @@ namespace PassApp.Web.Components.Validation
     public partial class ValidationForm
     {
         [Parameter]
+        public object? Model { get; set; }
+        [Parameter]
         public RenderFragment? ChildContent { get; set; }
         public List<ValidationComponent> Children { get; set; } = new();
 

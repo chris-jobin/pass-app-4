@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using PassApp.Web.Components.Validation.Attributes;
 
 namespace PassApp.Web.Components.Validation
 {
@@ -14,9 +16,11 @@ namespace PassApp.Web.Components.Validation
     {
         [CascadingParameter]
         public ValidationForm? Form { get; set; }
+        [CascadingParameter]
+        public object? Model { get; set; }
         [Parameter]
         public Expression<Func<object>>? For { get; set; }
-        public bool IsError { get; set; }
+        public bool IsValid { get; set; } = true;
         public string? ErrorMessage { get; set; }
 
         protected override async Task OnInitializedAsync()
@@ -31,10 +35,6 @@ namespace PassApp.Web.Components.Validation
 
             Form.AddChild(this);
 
-            var attr = expression?.Member.GetCustomAttribute<ValidateAttribute>();
-            if (attr != null && attr.Required)
-                ErrorMessage = $"{expression?.Member.Name} is required.";
-
             await Task.Yield();
         }
 
@@ -43,6 +43,20 @@ namespace PassApp.Web.Components.Validation
             var member = For?.Body as MemberExpression;
             var unary = For?.Body as UnaryExpression;
             return member ?? (unary != null ? unary.Operand as MemberExpression : null);
+        }
+
+        private static object[] GetAttributes(MemberExpression expression)
+        {
+            var propertyInfo = (PropertyInfo)expression.Member;
+            var attrs = propertyInfo.GetCustomAttributes(false);
+            return attrs;
+        }
+
+        private object? GetValue(MemberExpression expression)
+        {
+            var propertyInfo = (PropertyInfo)expression.Member;
+            var value = propertyInfo.GetValue(Model);
+            return value;
         }
 
         public bool Validate()
@@ -55,16 +69,36 @@ namespace PassApp.Web.Components.Validation
             if (expression == null)
                 return true;
 
-            var attr = expression?.Member.GetCustomAttribute<ValidateAttribute>();
-            if (attr != null)
+            var attrs = GetAttributes(expression);
+
+            if (attrs == null)
+                return true;
+
+            var value = GetValue(expression);
+
+            IsValid = true;
+
+            foreach (var attr in attrs)
             {
-                IsError = true;
-                IsError = attr.Required && IsError;
+                if (attr is StringValidationAttribute)
+                    IsValid = ValidateStringValidation(attr as StringValidationAttribute, value as string) && IsValid;
             }
 
             StateHasChanged();
 
-            return !IsError;
+            return IsValid;
+        }
+
+        private bool ValidateStringValidation(StringValidationAttribute attr, string? value)
+        {
+            var isvalid = true;
+            isvalid = !string.IsNullOrEmpty(value) && isvalid;
+            isvalid = !string.IsNullOrWhiteSpace(value) && isvalid;
+
+            if (!isvalid)
+                ErrorMessage = attr.ErrorMessage;
+
+            return isvalid;
         }
     }
 }

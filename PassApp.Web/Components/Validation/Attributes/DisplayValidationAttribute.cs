@@ -4,15 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PassApp.Web.Components.Validation
+namespace PassApp.Web.Components.Validation.Attributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public class ValidateAttribute : Attribute
+    public class DisplayValidationAttribute : Attribute
     {
         public string? Name { get; set; }
-        public bool Required { get; set; }
 
-        public ValidateAttribute(string name)
+        public DisplayValidationAttribute(string? name)
         {
             Name = name;
         }
