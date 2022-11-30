@@ -40,7 +40,8 @@ namespace PassApp.Web.Components.Form
         protected async Task SavePassword()
         {
             ModalRef?.Close();
-            Model.Password = FormRef?.Model.Password;
+            if (Model != null && !string.IsNullOrEmpty(FormRef?.Model.Password))
+                Model.Password = FormRef?.Model.Password;
             await Task.Yield();
         }
     }

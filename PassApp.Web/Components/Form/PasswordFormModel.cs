@@ -41,7 +41,7 @@ namespace PassApp.Web.Components.Form
             Password = sb.ToString();
         }
 
-        private char GetChar(string includedChars, RandomNumberGenerator randomNumberGenerator)
+        private static char GetChar(string includedChars, RandomNumberGenerator randomNumberGenerator)
         {
             var byteArray = new byte[1];
             char c;
