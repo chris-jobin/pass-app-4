@@ -1,0 +1,46 @@
+﻿@using PassApp.Web.Components.Form
+@using PassApp.Web.Components.Modal
+@using PassApp.Web.Components.Validation
+
+@if (Model != null)
+{
+    @if (IsAuthorized)
+    {
+        @ChildContent
+    }
+    else
+    {
+        <Modal @ref="ModalRef" Size="md" Centered ShowOnLoad HideTopAndBottom>
+            <ValidationForm @ref="Context" Model="Model">
+                <div class="py-1">
+                    <Label For="@(() => Model.Username)" />
+                    <input type="text" class="form-control" @bind-value="Model.Username" />
+                    <ValidationComponent For="@(() => Model.Username)" />
+                </div>
+                <div class="py-1">
+                    <Label For="@(() => Model.Password)" />
+                    <div class="input-group">
+                        @if (ShowPassword)
+                        {
+                            <input type="text" class="form-control" @bind-value="Model.Password" />
+                        }
+                        else
+                        {
+                            <input type="password" class="form-control" @bind-value="Model.Password" />
+                        }
+                        <button class="btn btn-outline-secondary" @onmousedown="@(() => ShowPassword = true)" @onmouseup="@(() => ShowPassword = false)">
+                            <span class="oi oi-eye"></span>
+                        </button>
+                    </div>
+                    <ValidationComponent For="@(() => Model.Password)" />
+                </div>
+                <div class="py-4">
+                    <button class="btn btn-primary" @onclick="Login">
+                        <span class="oi oi-lock-unlocked"></span>
+                        Login
+                    </button>
+                </div>
+            </ValidationForm>
+        </Modal>
+    }
+}

@@ -14,10 +14,23 @@ namespace PassApp.Web.Components.Modal
         [Parameter]
         public string Size { get; set; } = "lg";
         [Parameter]
+        public bool Centered { get; set; }
+        [Parameter]
+        public bool ShowOnLoad { get; set; }
+        [Parameter]
+        public bool HideTopAndBottom { get; set; }
+        [Parameter]
         public EventCallback Save { get; set; }
 
         public bool Show { get; set; }
         public bool IsOperating { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+            if (ShowOnLoad)
+                Open();
+            await Task.Yield();
+        }
 
         public void Open()
         {

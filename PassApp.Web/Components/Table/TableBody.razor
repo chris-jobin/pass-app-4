@@ -44,7 +44,7 @@
                         }
                     </td>
                 }
-                else if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Button || Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password)
+                else if ((Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Button || Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password) && !string.IsNullOrEmpty(cell.Text))
                 {
                     <td class="table-content-overflow" @onmouseover="@(() => cell.ShowButton = true)" @onmouseleave="@(() => cell.ShowButton = false)">
                         @if (cell.ShowButton)
