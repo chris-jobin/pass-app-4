@@ -88,7 +88,7 @@
                         {
                             <input type="password" class="form-control" @bind-value="Model.Password" />
                         }
-                        <button class="btn btn-outline-secondary" @onmousedown="@(() => ShowPassword = true)" @onmouseup="@(() => ShowPassword = false)">
+                        <button class="btn btn-outline-secondary" tabindex="-1" @onmousedown="@(() => ShowPassword = true)" @onmouseup="@(() => ShowPassword = false)">
                             <span class="oi oi-eye"></span>
                         </button>
                         <button class="btn btn-outline-primary" @onclick="CopyToClipboard">
