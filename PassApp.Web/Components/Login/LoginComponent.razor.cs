@@ -16,7 +16,6 @@ namespace PassApp.Web.Components.Login
         protected ValidationForm? Context { get; set; }
         protected bool IsAuthorized { get; set; }
         protected Modal.Modal? ModalRef { get; set; }
-        protected bool ShowPassword { get; set; }
 
         protected override async Task OnInitializedAsync()
         {

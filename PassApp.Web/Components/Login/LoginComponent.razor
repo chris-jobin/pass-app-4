@@ -19,19 +19,7 @@
                 </div>
                 <div class="py-1">
                     <Label For="@(() => Model.Password)" />
-                    <div class="input-group">
-                        @if (ShowPassword)
-                        {
-                            <input type="text" class="form-control" @bind-value="Model.Password" />
-                        }
-                        else
-                        {
-                            <input type="password" class="form-control" @bind-value="Model.Password" />
-                        }
-                        <button class="btn btn-outline-secondary" tabindex="-1" @onmousedown="@(() => ShowPassword = true)" @onmouseup="@(() => ShowPassword = false)">
-                            <span class="oi oi-eye"></span>
-                        </button>
-                    </div>
+                    <PasswordComponent @bind-Value="Model.Password" />
                     <ValidationComponent For="@(() => Model.Password)" />
                 </div>
                 <div class="py-4">

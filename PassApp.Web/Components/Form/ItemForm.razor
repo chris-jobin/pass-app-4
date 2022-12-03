@@ -4,110 +4,108 @@
 @if (Model != null)
 {
     <ValidationForm @ref="Context" Model="Model"> 
-        <div class="container">
-            <div class="row py-1">
-                <div class="col-lg-4">
-                    <Label For="@(() => Model.Category)" />
-                </div>
-                <div class="col-lg-8">
-                    <div class="input-group">
-                        @if (ShowCategoryDropDown)
-                        {
-                            <select class="form-select" @bind="Model.Category">
-                                @foreach (var cat in Model.Categories ?? Enumerable.Empty<string>())
+        <div class="row py-1">
+            <div class="col-lg-4">
+                <Label For="@(() => Model.Category)" />
+            </div>
+            <div class="col-lg-8">
+                <div class="input-group">
+                    @if (ShowCategoryDropDown)
+                    {
+                        <select class="form-select" @bind="Model.Category">
+                            @foreach (var cat in Model.Categories ?? Enumerable.Empty<string>())
+                            {
+                                <option value="" selected disabled hidden>Select</option>
+                                @if (Model.Category == cat)
                                 {
-                                    <option value="" selected disabled hidden>Select</option>
-                                    @if (Model.Category == cat)
-                                    {
-                                        <option value="@cat" selected>@cat</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@cat">@cat</option>
-                                    }
+                                    <option value="@cat" selected>@cat</option>
                                 }
-                            </select>
-                        }
-                        else
-                        {
-                            <input type="text" autocomplete="on" class="form-control" @bind-value="Model.Category" />
-                        }
-                        <button class="btn @(ShowCategoryDropDown ? "btn-secondary" : "btn-outline-secondary")" @onclick="ToggleCategory">
-                            <span class="oi oi-list"></span>
-                        </button>
-                    </div>
-                    <ValidationComponent For="@(() => Model.Category)" />
+                                else
+                                {
+                                    <option value="@cat">@cat</option>
+                                }
+                            }
+                        </select>
+                    }
+                    else
+                    {
+                        <input type="text" autocomplete="on" class="form-control" @bind-value="Model.Category" />
+                    }
+                    <button class="btn @(ShowCategoryDropDown ? "btn-secondary" : "btn-outline-secondary")" @onclick="ToggleCategory">
+                        <span class="oi oi-list"></span>
+                    </button>
                 </div>
+                <ValidationComponent For="@(() => Model.Category)" />
             </div>
-            <div class="row py-1">
-                <div class="col-lg-4">
-                    <Label For="@(() => Model.Title)" />
-                </div>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" @bind-value="Model.Title" />
-                    <ValidationComponent For="@(() => Model.Title)" />
-                </div>
+        </div>
+        <div class="row py-1">
+            <div class="col-lg-4">
+                <Label For="@(() => Model.Title)" />
             </div>
-            <div class="row py-1">
-                <div class="col-lg-4">
-                    <Label For="@(() => Model.Link)" />
-                </div>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" @bind-value="Model.Link" />
-                </div>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" @bind-value="Model.Title" />
+                <ValidationComponent For="@(() => Model.Title)" />
             </div>
-            <div class="row py-1">
-                <div class="col-lg-4">
-                    <Label For="@(() => Model.Username)" />
-                </div>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" @bind-value="Model.Username" />
-                    <ValidationComponent For="@(() => Model.UsernameEmail)" />
-                </div>
+        </div>
+        <div class="row py-1">
+            <div class="col-lg-4">
+                <Label For="@(() => Model.Link)" />
             </div>
-            <div class="row py-1">
-                <div class="col-lg-4">
-                    <Label For="@(() => Model.Email)" />
-                </div>
-                <div class="col-lg-8">
-                    <input type="text" class="form-control" @bind-value="Model.Email" />
-                    <ValidationComponent For="@(() => Model.UsernameEmail)" />
-                </div>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" @bind-value="Model.Link" />
             </div>
-            <div class="row py-1">
-                <div class="col-lg-4">
-                    <Label For="@(() => Model.Password)" />
-                </div>
-                <div class="col-lg-8">
-                    <div class="input-group">
-                        @if (ShowPassword)
-                        {
-                            <input type="text" class="form-control" @bind-value="Model.Password" />
-                        }
-                        else
-                        {
-                            <input type="password" class="form-control" @bind-value="Model.Password" />
-                        }
-                        <button class="btn btn-outline-secondary" tabindex="-1" @onmousedown="@(() => ShowPassword = true)" @onmouseup="@(() => ShowPassword = false)">
-                            <span class="oi oi-eye"></span>
-                        </button>
-                        <button class="btn btn-outline-primary" @onclick="CopyToClipboard">
-                            <span class="oi oi-clipboard"></span>
-                        </button>
-                        <button class="btn btn-outline-success" @onclick="@(() => ModalRef?.Open())">
-                            <span class="oi oi-reload"></span>
-                        </button>
-                    </div>
-                    <ValidationComponent For="@(() => Model.Password)" />
-                </div>
+        </div>
+        <div class="row py-1">
+            <div class="col-lg-4">
+                <Label For="@(() => Model.Username)" />
             </div>
-            <div class="row py-1">
-                <div class="col-lg-4">
-                    <Label For="@(() => Model.Notes)" />
+            <div class="col-lg-8">
+                <input type="text" class="form-control" @bind-value="Model.Username" />
+                <ValidationComponent For="@(() => Model.UsernameEmail)" />
+            </div>
+        </div>
+        <div class="row py-1">
+            <div class="col-lg-4">
+                <Label For="@(() => Model.Email)" />
+            </div>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" @bind-value="Model.Email" />
+                <ValidationComponent For="@(() => Model.UsernameEmail)" />
+            </div>
+        </div>
+        <div class="row py-1">
+            <div class="col-lg-4">
+                <Label For="@(() => Model.Password)" />
+            </div>
+            <div class="col-lg-8">
+                <div class="input-group">
+                    @if (ShowPassword)
+                    {
+                        <input type="text" class="form-control" @bind-value="Model.Password" />
+                    }
+                    else
+                    {
+                        <input type="password" class="form-control" @bind-value="Model.Password" />
+                    }
+                    <button class="btn btn-outline-secondary" tabindex="-1" @onmousedown="@(() => ShowPassword = true)" @onmouseup="@(() => ShowPassword = false)">
+                        <span class="oi oi-eye"></span>
+                    </button>
+                    <button class="btn btn-outline-primary" @onclick="CopyToClipboard">
+                        <span class="oi oi-clipboard"></span>
+                    </button>
+                    <button class="btn btn-outline-success" @onclick="@(() => ModalRef?.Open())">
+                        <span class="oi oi-reload"></span>
+                    </button>
                 </div>
-                <div class="col-lg-8">
-                    <textarea class="form-control" @bind="Model.Notes" />
-                </div>
+                <ValidationComponent For="@(() => Model.Password)" />
+            </div>
+        </div>
+        <div class="row py-1">
+            <div class="col-lg-4">
+                <Label For="@(() => Model.Notes)" />
+            </div>
+            <div class="col-lg-8">
+                <textarea class="form-control" @bind="Model.Notes" />
             </div>
         </div>
     </ValidationForm>
