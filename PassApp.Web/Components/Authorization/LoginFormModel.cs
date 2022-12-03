@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PassApp.Web.Components.Login
+namespace PassApp.Web.Components.Authorization
 {
-    public class LoginModel
+    public class LoginFormModel
     {
         [DisplayValidation("Username")]
         [StringValidation("Username is required.")]
@@ -16,11 +16,5 @@ namespace PassApp.Web.Components.Login
         [DisplayValidation("Password")]
         [StringValidation("Password is required.")]
         public string? Password { get; set; }
-
-        public void Clear()
-        {
-            Username = null;
-            Password = null;
-        }
     }
 }
