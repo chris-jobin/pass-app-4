@@ -36,18 +36,19 @@
             this.blazorWebView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.blazorWebView.Location = new System.Drawing.Point(0, 0);
             this.blazorWebView.Name = "blazorWebView";
-            this.blazorWebView.Size = new System.Drawing.Size(800, 450);
+            this.blazorWebView.Size = new System.Drawing.Size(1104, 611);
             this.blazorWebView.TabIndex = 0;
             this.blazorWebView.Text = "blazorWebView1";
             // 
-            // Form1
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1104, 611);
             this.Controls.Add(this.blazorWebView);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.MinimumSize = new System.Drawing.Size(690, 450);
+            this.Name = "Main";
+            this.Text = "Pass-App";
             this.ResumeLayout(false);
 
         }

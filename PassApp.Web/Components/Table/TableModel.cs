@@ -94,7 +94,7 @@ namespace PassApp.Web.Components.Table
 
         public List<ItemModel>? GetColumnItems(int index)
         {
-            var columnItems = StoredItems?.Where(x => !string.IsNullOrEmpty(x.Content?[index].Text)).Select(x => x.Content?[index].Text).ToList();
+            var columnItems = StoredItems?.Where(x => !string.IsNullOrEmpty(x.Content?[index].Text)).Select(x => x.Content?[index].Text).Distinct().ToList();
             return columnItems?.Select(x => new ItemModel
             {
                 Id = x,

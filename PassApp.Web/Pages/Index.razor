@@ -1,8 +1,10 @@
-﻿@using PassApp.Web.Components
+﻿@using PassApp.Data;
+@using PassApp.Web.Components
 @using PassApp.Web.Components.Buttons;
 @using PassApp.Web.Components.Form
 @using PassApp.Web.Components.Modal
 @using PassApp.Web.Components.Table;
+@inject PassAppContext context
 @page "/"
 
 <Table Model="Table" Action="ListingAction" />
@@ -19,10 +21,11 @@
     protected override async Task OnInitializedAsync()
     {
         var random = new Random();
+        var temp = context.Users.ToList();
 
         Table = new TableModel
-            {
-                Headers = new List<TableHeaderModel>
+        {
+            Headers = new List<TableHeaderModel>
             {
                 new TableHeaderModel { Name = "Category", Width = 10, Filter = TableHeaderModel.FilterType.DropDown },
                 new TableHeaderModel { Name = "Title", Width = 10, Filter = TableHeaderModel.FilterType.Text, Column = TableHeaderModel.ColumnType.Link },
@@ -31,13 +34,13 @@
                 new TableHeaderModel { Name = "Password", Width = 10, Column = TableHeaderModel.ColumnType.Password },
                 new TableHeaderModel { Name = "", Width = 1 }
             },
-                StoredItems = new List<TableBodyModel>(),
-                FooterButtons = new List<IconButtonModel>
+            StoredItems = new List<TableBodyModel>(),
+            FooterButtons = new List<IconButtonModel>
             {
                 new IconButtonModel { IconClass = "oi oi-plus text-success", IconText = "Add", Parameters = new[] { "", "" } }
             },
-                HasPaging = true
-            };
+            HasPaging = true
+        };
 
         var numOfItems = random.Next(25, 250);
 
@@ -50,8 +53,8 @@
             var id = Guid.NewGuid();
 
             Table.StoredItems.Add(new TableBodyModel
-                {
-                    Content = new List<TableCellModel>
+            {
+                Content = new List<TableCellModel>
                 {
                     new TableCellModel { Text = "Category" },
                     new TableCellModel { Text = "Title" },
@@ -59,11 +62,11 @@
                     new TableCellModel { Text = email },
                     new TableCellModel { Text = password }
                 },
-                    Buttons = new List<IconButtonModel>
+                Buttons = new List<IconButtonModel>
                 {
                     new IconButtonModel { IconClass = "oi oi-pencil text-primary", IconText = "View", Parameters = new[] { id.ToString() } }
                 }
-                });
+            });
         }
     }
 
