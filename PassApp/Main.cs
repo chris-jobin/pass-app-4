@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Components.WebView.WindowsForms;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PassApp.Data;
-using PassApp.Web;
+using PassApp.Client;
 
 namespace PassApp
 {

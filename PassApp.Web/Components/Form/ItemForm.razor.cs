@@ -15,30 +15,19 @@ namespace PassApp.Web.Components.Form
         [Inject]
         public IJSRuntime Js { get; set; }
 
+        [Parameter]
         public ItemFormModel? Model { get; set; }
+
         public ValidationForm? Context { get; set; }
         public Modal.Modal? ModalRef { get; set; }
         public PasswordForm? FormRef { get; set; }
-
         public bool ShowCategoryDropDown { get; set; }
         public bool ShowPassword { get; set; }
-
-        protected override async Task OnInitializedAsync()
-        {
-            Model = new();
-            Model.Categories = new List<string>
-            {
-                "General",
-                "Banking",
-                "Social"
-            };
-            await Task.Yield();
-        }
 
         protected async Task ToggleCategory()
         {
             ShowCategoryDropDown= !ShowCategoryDropDown;
-            Model.Category = "";
+            Model.Category = default;
             StateHasChanged();
             await Task.Yield();
         }

@@ -70,14 +70,12 @@ namespace PassApp.Web.Components.Table
                         var description = filteredItems?[j]?.Content?[i]?.Text?.Trim()?.ToLower();
                         var headerFilterText = Headers[i]?.FilterText?.ToLower();
 
-                        if (description != null && headerFilterText != null)
+                        if ((string.IsNullOrEmpty(description) || string.IsNullOrEmpty(headerFilterText)) ||
+                            (Headers[i].Filter == TableHeaderModel.FilterType.Text && !description.Contains(headerFilterText)) ||
+                            Headers[i].Filter == TableHeaderModel.FilterType.DropDown && description != headerFilterText)
                         {
-                            if ((Headers[i].Filter == TableHeaderModel.FilterType.Text && !description.Contains(headerFilterText)) ||
-                                Headers[i].Filter == TableHeaderModel.FilterType.DropDown && description != headerFilterText)
-                            {
-                                filteredItems?.RemoveAt(j);
-                                j--;
-                            }
+                            filteredItems?.RemoveAt(j);
+                            j--;
                         }
                     }
                 }

@@ -1,0 +1,10 @@
+﻿@using PassApp.Web.Components.Form
+@using PassApp.Web.Components.Modal
+@using PassApp.Web.Components.Table;
+@page "/"
+
+<Table Model="Table" Action="ListingAction" />
+
+<Modal @ref="ModalRef" Centered Save="SaveItemForm">
+    <ItemForm @ref="FormRef" Model="ItemFormModel" />
+</Modal>

@@ -15,4 +15,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PassApp.Data\PassApp.Data.csproj" />
+    <ProjectReference Include="..\PassApp.Web\PassApp.Web.csproj" />
+  </ItemGroup>
+
 </Project>

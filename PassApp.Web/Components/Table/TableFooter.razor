@@ -7,7 +7,7 @@
                 @foreach (var button in Model?.FooterButtons ?? Enumerable.Empty<IconButtonModel>())
                 {
                     <div class="p-1 text-right">
-                        <IconButton IconClass="@button.IconClass" IconText="@button.IconText" OnClick="Action" />
+                        <IconButton IconClass="@button.IconClass" IconText="@button.IconText" OnClick="@(() => OnClick(button.Parameters))" />
                     </div>
                 }
             </td>

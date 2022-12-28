@@ -48,6 +48,7 @@
             this.Controls.Add(this.blazorWebView);
             this.MinimumSize = new System.Drawing.Size(690, 450);
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pass-App";
             this.ResumeLayout(false);
 

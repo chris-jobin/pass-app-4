@@ -76,7 +76,7 @@
                 <td class="text-right user-selection-none icon-button-no-wrap">
                     @foreach (var button in (row?.Buttons ?? Enumerable.Empty<IconButtonModel>()))
                     {
-                        <IconButton IconClass="@button.IconClass" IconText="@button.IconText" OnClick="@(() => OnClick(button?.Parameters))" /><span>&nbsp;</span>
+                        <IconButton IconClass="@button.IconClass" IconText="@button.IconText" OnClick="@(() => OnClick(button.Parameters))" /><span>&nbsp;</span>
                     }
                 </td>
             }

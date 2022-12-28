@@ -15,5 +15,11 @@ namespace PassApp.Web.Components.Table
         public TableModel? Model { get; set; }
         [Parameter]
         public EventCallback<string[]> Action { get; set; }
+
+        protected async Task OnClick(string[] args)
+        {
+            if (Action.HasDelegate)
+                await Action.InvokeAsync(args);
+        }
     }
 }
