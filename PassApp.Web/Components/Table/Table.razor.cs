@@ -14,7 +14,7 @@ namespace PassApp.Web.Components.Table
         [Parameter]
         public EventCallback<string[]> Action { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnParametersSetAsync()
         {
             if (Model != null)
             {

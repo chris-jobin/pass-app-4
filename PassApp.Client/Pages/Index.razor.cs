@@ -20,8 +20,7 @@ namespace PassApp.Client.Pages
         public TableModel? Table { get; set; }
         public Modal? ModalRef { get; set; }
         public ItemForm? FormRef { get; set; }
-        public ItemFormModel? ItemFormModel { get; set; }
-        public string? FormId { get; set; }
+        public ItemFormModel? ItemForm { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -67,13 +66,13 @@ namespace PassApp.Client.Pages
 
         protected async Task ListingAction(string[] args)
         {
-            ItemFormModel = await PassAppContext.GetItemFormModel(args[1]);
+            ItemForm = await PassAppContext.GetItemFormModel(args[1]);
             ModalRef?.Open();
         }
 
         protected async Task SaveItemForm()
         {
-            if (FormRef.Context.IsValid() && await PassAppContext.SetItemFormModel(ItemFormModel))
+            if (FormRef.Context.IsValid() && await PassAppContext.SetItemFormModel(ItemForm))
             {
                 ModalRef?.Close();
                 Table = await GetTable();
