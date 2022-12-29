@@ -1,0 +1,25 @@
+﻿@using PassApp.Web.Form
+@using PassApp.Web.Validation
+
+@if (Model != null)
+{
+    <ValidationForm @ref="Context" Model="Model">
+        <div class="py-1">
+            <Label For="@(() => Model.Username)" />
+            <input type="text" class="form-control" @bind-value="Model.Username" />
+            <ValidationComponent For="@(() => Model.Username)" />
+        </div>
+        <div class="py-1">
+            <Label For="@(() => Model.Password)" />
+            <PasswordComponent @bind-Value="Model.Password" />
+            <ValidationComponent For="@(() => Model.Password)" />
+        </div>
+        <div class="py-4">
+            <button class="btn btn-primary" @onclick="Login">
+                <span class="oi oi-lock-unlocked"></span>
+                Login
+            </button>
+            <button class="btn btn-link" @onclick="Register">Register</button>
+        </div>
+    </ValidationForm>
+}

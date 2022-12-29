@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PassApp.Data.Models;
-using PassApp.Web.Components.Form;
+using PassApp.Web.Form;
 using System;
 using System.Collections.Generic;
 using System.Linq;

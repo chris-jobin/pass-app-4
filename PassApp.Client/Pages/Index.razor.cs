@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using PassApp.Data;
-using PassApp.Web.Components.Buttons;
-using PassApp.Web.Components.Form;
-using PassApp.Web.Components.Modal;
-using PassApp.Web.Components.Table;
+using PassApp.Web.Buttons;
+using PassApp.Web.Form;
+using PassApp.Web.Modal;
+using PassApp.Web.Table;
 using System;
 using System.Collections.Generic;
 using System.Linq;
