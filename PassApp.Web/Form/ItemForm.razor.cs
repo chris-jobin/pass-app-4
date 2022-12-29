@@ -18,7 +18,7 @@ namespace PassApp.Web.Form
         [Parameter]
         public ItemFormModel? Model { get; set; }
         [Parameter]
-        public EventCallback OnDelete { get; set; }
+        public EventCallback<string> OnDelete { get; set; }
 
         public ValidationForm? Context { get; set; }
         public Modal.Modal? ModalRef { get; set; }
@@ -48,7 +48,7 @@ namespace PassApp.Web.Form
         protected async Task Delete()
         {
             if (OnDelete.HasDelegate)
-                await OnDelete.InvokeAsync(new[] { Model.Id });
+                await OnDelete.InvokeAsync(Model.Id);
         }
     }
 }

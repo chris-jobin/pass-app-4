@@ -15,7 +15,7 @@ namespace PassApp.Data
 
         private async Task<List<string>> GetDistinctCategories() => await Records.Select(x => x.Category).Distinct().ToListAsync();
 
-        public async Task<ItemFormModel> GetItemFormModel(string? id)
+        public async Task<ItemFormModel> GetItemFormModel(string id)
         {
             var record = await Records.SingleOrDefaultAsync(x => x.Id.ToString() == id);
 
@@ -58,6 +58,26 @@ namespace PassApp.Data
                 record.Notes = model.Notes;
 
                 await SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteRecord(string id)
+        {
+            try
+            {
+                var record = await Records.FindAsync(Guid.Parse(id));
+
+                if (record != null)
+                {
+                    Records.Remove(record);
+                    await SaveChangesAsync();
+                }
 
                 return true;
             }

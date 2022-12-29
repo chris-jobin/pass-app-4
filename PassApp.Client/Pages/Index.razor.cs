@@ -70,10 +70,20 @@ namespace PassApp.Client.Pages
             ModalRef?.Open();
         }
 
-        protected async Task SaveItemForm()
+        protected async Task SaveForm()
         {
             if (FormRef.Context.IsValid() && await PassAppContext.SetItemFormModel(ItemForm))
             {
+                ModalRef?.Close();
+                Table = await GetTable();
+            }
+        }
+
+        protected async Task Delete(string id)
+        {
+            if (await PassAppContext.DeleteRecord(id))
+            {
+                FormRef?.DeleteRef?.Close();
                 ModalRef?.Close();
                 Table = await GetTable();
             }
