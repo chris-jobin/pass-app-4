@@ -3,6 +3,13 @@
 
 @if (Model != null)
 {
+    @if (LoginError)
+    {
+        <div class="alert alert-danger border-danger text-center">
+            <span class="oi oi-warning text-danger"></span>
+            Login Attempt Failed
+        </div>
+    }
     <ValidationForm @ref="Context" Model="Model">
         <div class="py-1">
             <Label For="@(() => Model.Username)" />
@@ -19,7 +26,6 @@
                 <span class="oi oi-lock-unlocked"></span>
                 Login
             </button>
-            <button class="btn btn-link" @onclick="Register">Register</button>
         </div>
     </ValidationForm>
 }

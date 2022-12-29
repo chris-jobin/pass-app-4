@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassApp.Web", "PassApp.Web\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassApp.Data", "PassApp.Data\PassApp.Data.csproj", "{723A9451-75D7-495A-ACF8-3E3DDF0B717A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassApp.Client", "PassApp.Client\PassApp.Client.csproj", "{EC061D8E-836A-4791-BDE4-2F3E2313E660}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassApp.Client", "PassApp.Client\PassApp.Client.csproj", "{EC061D8E-836A-4791-BDE4-2F3E2313E660}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

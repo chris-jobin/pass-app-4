@@ -21,7 +21,7 @@ namespace PassApp.Data
 
             return new ItemFormModel
             {
-                Id = record?.Id.ToString() ?? id,
+                Id = record?.Id ?? Guid.Parse(id),
                 Categories = await GetDistinctCategories(),
                 Category = record?.Category,
                 Title = record?.Title,
@@ -37,13 +37,13 @@ namespace PassApp.Data
         {
             try
             {
-                var record = await Records.FindAsync(Guid.Parse(model.Id));
+                var record = await Records.FindAsync(model.Id);
 
                 if (record == null)
                 {
                     record = new Record
                     {
-                        Id = Guid.Parse(model.Id),
+                        Id = model.Id,
                         Created = DateTime.Now,
                     };
                     await Records.AddAsync(record);

@@ -48,7 +48,7 @@ namespace PassApp.Web.Form
         protected async Task Delete()
         {
             if (OnDelete.HasDelegate)
-                await OnDelete.InvokeAsync(Model.Id);
+                await OnDelete.InvokeAsync(Model?.Id.ToString());
         }
     }
 }

@@ -1,0 +1,20 @@
+﻿@using PassApp.Web.Authorization
+@using PassApp.Web.Modal
+
+@if (IsAuthorized)
+{
+    @ChildContent
+}
+else
+{
+    <Modal @ref="ModalRef" Size="md" Centered ShowOnLoad HideTopAndBottom>
+        @if (HasUser)
+        {
+            <LoginForm @ref="LoginRef" OnLogin="Login" />
+        }
+        else
+        {
+            <RegisterForm @ref="RegisterRef" OnRegister="Register" />
+        }
+    </Modal>
+}

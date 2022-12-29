@@ -113,7 +113,7 @@
             <div class="col-lg-4">
             </div>
             <div class="col-lg-8">
-                <Button BtnClass="btn btn-danger" BtnText="Delete" OnClick="@(() => DeleteRef?.Open())" />
+                <Button BtnClass="btn btn-danger btn-sm" BtnText="Delete" OnClick="@(() => DeleteRef?.Open())" />
             </div>
         </div>
     </ValidationForm>
@@ -126,7 +126,7 @@
         Centered
         CloseText="No, Cancel"
         ConfirmText="Yes, Delete"
-        ConfirmBtnClass="btn btn-danger" 
+        ConfirmBtnClass="btn btn-danger"
         OnConfirm="Delete">
         <div class="alert alert-danger border-danger text-center" role="alert">
             <span class="oi oi-warning text-danger"></span>

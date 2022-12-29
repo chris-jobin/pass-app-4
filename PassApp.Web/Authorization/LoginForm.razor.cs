@@ -12,21 +12,14 @@ namespace PassApp.Web.Authorization
     {
         [Parameter]
         public EventCallback OnLogin { get; set; }
-        [Parameter]
-        public EventCallback OnRegister { get; set; }
         public LoginFormModel? Model { get; set; } = new();
         public ValidationForm? Context { get; set; }
+        public bool LoginError { get; set; }
 
         protected async Task Login()
         {
             if (Context.IsValid() && OnLogin.HasDelegate)
                 await OnLogin.InvokeAsync();
-        }
-
-        protected async Task Register()
-        {
-            if (OnRegister.HasDelegate)
-                await OnRegister.InvokeAsync();
         }
     }
 }

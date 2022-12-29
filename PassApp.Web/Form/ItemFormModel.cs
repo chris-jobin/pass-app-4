@@ -9,7 +9,7 @@ namespace PassApp.Web.Form
 {
     public class ItemFormModel
     {
-        public string? Id { get; set; }
+        public Guid Id { get; set; }
 
         [DisplayValidation("Category")]
         [StringValidation("Category is required.")]
