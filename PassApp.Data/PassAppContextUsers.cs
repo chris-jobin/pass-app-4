@@ -29,6 +29,9 @@ namespace PassApp.Data
         {
             try
             {
+                if (await Users.AnyAsync())
+                    return false;
+
                 var user = new User
                 {
                     Id = Guid.NewGuid(),
@@ -37,6 +40,25 @@ namespace PassApp.Data
                     Password = password
                 };
                 await Users.AddAsync(user);
+                await SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteUser()
+        {
+            try
+            {
+                var user = await Users.FirstAsync();
+                var records = await Records.ToListAsync();
+
+                Users.Remove(user);
+                Records.RemoveRange(records);
                 await SaveChangesAsync();
 
                 return true;

@@ -4,6 +4,18 @@
 @if (IsAuthorized)
 {
     @ChildContent
+
+    <ConfirmModal @ref="DeleteRef"
+        Centered
+        CloseText="No, Cancel"
+        ConfirmText="Yes, Delete"
+        ConfirmBtnClass="btn btn-danger"
+        OnConfirm="OnDeleteProfile">
+        <div class="alert alert-danger border-danger text-center" role="alert">
+            <span class="oi oi-warning text-danger"></span>
+            Are you sure you want to delete this profile and all records that belong to it?
+        </div>
+    </ConfirmModal>
 }
 else
 {

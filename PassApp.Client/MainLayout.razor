@@ -5,7 +5,8 @@
     <main>
         <AuthorizationComponent @ref="AuthRef">
             <div class="top-row px-4">
-                <button class="btn btn-link" @onclick="AuthRef.UnAuthorize">Logout</button>
+                <button class="btn btn-light text-primary" @onclick="AuthRef.UnAuthorize">Logout</button><span>&nbsp;</span>
+                <button class="btn btn-light text-danger" @onclick="AuthRef.DeleteProfile">Delete Profile</button>
             </div>
 
             <article class="content px-4">

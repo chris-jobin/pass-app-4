@@ -22,8 +22,9 @@ namespace PassApp.Client
         public LoginForm? LoginRef { get; set; }
         public RegisterForm? RegisterRef { get; set; }
         public bool HasUser { get; set; }
+        public ConfirmModal? DeleteRef { get; set; }
 
-        protected override async Task OnParametersSetAsync()
+        protected override async Task OnInitializedAsync()
         {
             HasUser = await PassAppContext.Users.AnyAsync();
         }
@@ -67,6 +68,22 @@ namespace PassApp.Client
             }
             else
                 RegisterRef.RegisterError = true;
+        }
+
+        public async Task DeleteProfile()
+        {
+            DeleteRef?.Open();
+            await Task.Yield();
+        }
+
+        protected async Task OnDeleteProfile()
+        {
+            if (await PassAppContext.DeleteUser())
+            {
+                await UnAuthorize();
+                HasUser = false;
+                StateHasChanged();
+            }
         }
     }
 }
