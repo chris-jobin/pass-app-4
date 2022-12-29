@@ -90,7 +90,7 @@ namespace PassApp.Web.Table
                 ChangePage(NumberOfPages);
         }
 
-        public List<ItemModel>? GetColumnItems(int index)
+        public List<string>? GetColumnItems(int index)
         {
             var columnItems = StoredItems?
                 .Where(x => !string.IsNullOrEmpty(x.Content?[index].Text))
@@ -98,11 +98,7 @@ namespace PassApp.Web.Table
                 .Distinct()
                 .Order()
                 .ToList();
-            return columnItems?.Select(x => new ItemModel
-            {
-                Id = x,
-                Name = x
-            }).ToList();
+            return columnItems?.ToList();
         }
 
         public void ChangePage(int page)

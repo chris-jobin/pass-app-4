@@ -16,9 +16,9 @@
                     {
                         <select class="form-select form-select-sm" @onchange="@((value) => OnFilterText(Model?.Headers.IndexOf(header) ?? 0, value?.Value?.ToString()))">
                             <option value=""></option>
-                            @foreach (var item in Model?.GetColumnItems(Model.Headers.IndexOf(header)) ?? Enumerable.Empty<ItemModel>())
+                            @foreach (var item in Model?.GetColumnItems(Model.Headers.IndexOf(header)) ?? Enumerable.Empty<string>())
                             {
-                                <option value="@item.Id">@item.Name</option>
+                                <option value="@item">@item</option>
                             }
                         </select>
                     }
