@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using PassApp.Web.Modal;
 using PassApp.Web.Validation;
 using System;
 using System.Collections.Generic;
@@ -14,15 +15,17 @@ namespace PassApp.Web.Form
     {
         [Inject]
         public IJSRuntime Js { get; set; }
-
         [Parameter]
         public ItemFormModel? Model { get; set; }
+        [Parameter]
+        public EventCallback OnDelete { get; set; }
 
         public ValidationForm? Context { get; set; }
         public Modal.Modal? ModalRef { get; set; }
         public PasswordForm? FormRef { get; set; }
         public bool ShowCategoryDropDown { get; set; }
         public bool ShowPassword { get; set; }
+        public ConfirmModal? DeleteRef { get; set; }
 
         protected async Task ToggleCategory()
         {
@@ -40,6 +43,12 @@ namespace PassApp.Web.Form
             if (Model != null && !string.IsNullOrEmpty(FormRef?.Model.Password))
                 Model.Password = FormRef?.Model.Password;
             await Task.Yield();
+        }
+
+        protected async Task Delete()
+        {
+            if (OnDelete.HasDelegate)
+                await OnDelete.InvokeAsync(new[] { Model.Id });
         }
     }
 }

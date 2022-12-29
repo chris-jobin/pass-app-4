@@ -1,4 +1,5 @@
-﻿@using PassApp.Web.Modal
+﻿@using PassApp.Web.Buttons
+@using PassApp.Web.Modal
 @using PassApp.Web.Validation
 
 @if (Model != null)
@@ -108,9 +109,28 @@
                 <textarea class="form-control" @bind="Model.Notes" />
             </div>
         </div>
+        <div class="row py-1">
+            <div class="col-lg-4">
+            </div>
+            <div class="col-lg-8">
+                <Button BtnClass="btn btn-danger" BtnText="Delete" OnClick="@(() => DeleteRef?.Open())" />
+            </div>
+        </div>
     </ValidationForm>
 
     <Modal @ref="ModalRef" Size="md" Centered Save="SavePassword">
         <PasswordForm @ref="FormRef" />
     </Modal>
+
+    <ConfirmModal @ref="DeleteRef"
+        Centered
+        CloseText="No, Cancel"
+        ConfirmText="Yes, Delete"
+        ConfirmBtnClass="btn btn-danger" 
+        OnConfirm="Delete">
+        <div class="alert alert-danger border-danger text-center" role="alert">
+            <span class="oi oi-warning text-danger"></span>
+            Are you sure you want to delete this record?
+        </div>
+    </ConfirmModal>
 }

@@ -92,7 +92,12 @@ namespace PassApp.Web.Table
 
         public List<ItemModel>? GetColumnItems(int index)
         {
-            var columnItems = StoredItems?.Where(x => !string.IsNullOrEmpty(x.Content?[index].Text)).Select(x => x.Content?[index].Text).Distinct().ToList();
+            var columnItems = StoredItems?
+                .Where(x => !string.IsNullOrEmpty(x.Content?[index].Text))
+                .Select(x => x.Content?[index].Text)
+                .Distinct()
+                .Order()
+                .ToList();
             return columnItems?.Select(x => new ItemModel
             {
                 Id = x,

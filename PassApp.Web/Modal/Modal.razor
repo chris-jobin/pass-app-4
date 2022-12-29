@@ -18,7 +18,7 @@
                 @if (!HideTopAndBottom)
                 {
                     <div class="py-1 modal-footer">
-                        <button class="btn btn-secondary" disabled="@IsOperating" @onclick="Close">Close</button>                        
+                        <button class="btn btn-secondary" disabled="@IsOperating" @onclick="Close">Close</button>
                         @if (Save.HasDelegate)
                         {
                             <button class="btn btn-primary" disabled="@IsOperating" @onclick="OnSave">
