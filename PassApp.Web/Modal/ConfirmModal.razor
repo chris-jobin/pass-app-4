@@ -1,4 +1,6 @@
-﻿
+﻿@using PassApp.Web.Form
+@using PassApp.Web.Validation
+
 @if (Show)
 {
     <div class="modal show d-block" tabindex="-1" role="dialog">
@@ -11,10 +13,19 @@
                 </div>
                 <div class="modal-body">
                     @ChildContent
+                    @if (RequireConfirmation)
+                    {
+                        <div class="row py-1">
+                            <div class="col">
+                                <small>Write "@(ConfirmationTextMatch)" to confirm the action.</small>
+                                <input type="text" placeholder="@ConfirmationTextMatch" class="form-control" @bind-value="ConfirmationText" />
+                            </div>
+                        </div>
+                    }
                 </div>
                 <div class="py-1 modal-footer">
                     <button class="btn btn-secondary" disabled="@IsOperating" @onclick="Close">@CloseText</button>
-                    <button class="@ConfirmBtnClass" disabled="@IsOperating" @onclick="Confirm">
+                    <button class="@ConfirmBtnClass" disabled="@(RequireConfirmation ? (ConfirmationText != ConfirmationTextMatch || IsOperating) : IsOperating)" @onclick="Confirm">
                         @if (IsOperating)
                         {
                             <span class="spinner-border spinner-border-sm"></span>

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Bogus;
+using Microsoft.AspNetCore.Components;
+using PassApp.Web.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +23,22 @@ namespace PassApp.Web.Modal
         public RenderFragment? ChildContent { get; set; }
         [Parameter]
         public EventCallback OnConfirm { get; set; }
+        [Parameter]
+        public bool RequireConfirmation { get; set; }
 
         public bool Show { get; set; }
         public bool IsOperating { get; set; }
+        public string? ConfirmationText { get; set; }
+        public string? ConfirmationTextMatch { get; set; }
 
         public void Open()
         {
             Show = true;
+            if (RequireConfirmation)
+            {
+                ConfirmationText = default;
+                ConfirmationTextMatch = new Faker().Lorem.Word();
+            }
             StateHasChanged();
         }
 
