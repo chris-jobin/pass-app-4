@@ -31,10 +31,8 @@ namespace PassApp.Web.Table
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
-            {
                 await Js.InvokeVoidAsync("SetResize", DotNetObjectReference.Create(this));
-                await Js.InvokeVoidAsync("UpdateItemsPerPage", DotNetObjectReference.Create(this));
-            }
+            await Js.InvokeVoidAsync("UpdateItemsPerPage", DotNetObjectReference.Create(this));
         }
 
         public async Task Refresh()
