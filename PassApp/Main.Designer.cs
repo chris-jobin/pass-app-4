@@ -46,7 +46,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1104, 611);
             this.Controls.Add(this.blazorWebView);
-            this.MinimumSize = new System.Drawing.Size(690, 450);
+            this.MinimumSize = new System.Drawing.Size(630, 400);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Pass-App";

@@ -60,7 +60,7 @@ namespace PassApp.Client.Pages
                     new IconButtonModel { IconClass = "oi oi-plus text-success", IconText = "Add", Parameters = new[] { "add", Guid.NewGuid().ToString() } }
                 },
                 HasPaging = true,
-                ItemsPerPage = 15
+                ItemsPerPage = 10
             };
         }
 

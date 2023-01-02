@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace PassApp.Web.Table
 {
     public partial  class Table
     {
+        [Inject]
+        public IJSRuntime Js { get; set; }
         [Parameter]
         public TableModel? Model { get; set; }
         [Parameter]
@@ -25,6 +28,15 @@ namespace PassApp.Web.Table
             await Task.Yield();
         }
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                await Js.InvokeVoidAsync("SetResize", DotNetObjectReference.Create(this));
+                await Js.InvokeVoidAsync("UpdateItemsPerPage", DotNetObjectReference.Create(this));
+            }
+        }
+
         public async Task Refresh()
         {
             StateHasChanged();
@@ -34,6 +46,19 @@ namespace PassApp.Web.Table
         protected void ChangePage(int page)
         {
             Model?.ChangePage(page);
+        }
+
+        [JSInvokable("UpdateItemsPerPage")]
+        public async Task UpdateItemsPerPage(int itemsPerPage)
+        {
+            if (Model.ItemsPerPage != itemsPerPage)
+            {
+                Model.ItemsPerPage = itemsPerPage;
+                if (Model.CurrentPage > Model.NumberOfPages)
+                    Model.ChangePage(Model.NumberOfPages);
+                StateHasChanged();
+            }
+            await Task.Yield();
         }
     }
 }
