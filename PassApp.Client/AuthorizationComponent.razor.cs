@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using PassApp.Data;
-using PassApp.Web.Authorization;
-using PassApp.Web.Modal;
+using PassApp.Shared.Authorization;
+using PassApp.Shared.Modal;
 using System;
 using System.Collections.Generic;
 using System.Linq;

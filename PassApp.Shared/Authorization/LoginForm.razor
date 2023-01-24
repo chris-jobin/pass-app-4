@@ -1,0 +1,33 @@
+﻿@using PassApp.Shared.Form
+@using PassApp.Shared.Validation
+
+@if (Model != null)
+{
+    @if (LoginError)
+    {
+        <div class="alert alert-danger border-danger text-center">
+            <span class="oi oi-warning text-danger"></span>
+            Login Attempt Failed
+        </div>
+    }
+    <ValidationForm @ref="Context" Model="Model">
+        <form @onsubmit="Login">
+            <div class="py-1">
+                <Label For="@(() => Model.Username)" />
+                <input type="text" class="form-control" @bind-value="Model.Username" />
+                <ValidationComponent For="@(() => Model.Username)" />
+            </div>
+            <div class="py-1">
+                <Label For="@(() => Model.Password)" />
+                <PasswordComponent @bind-Value="Model.Password" />
+                <ValidationComponent For="@(() => Model.Password)" />
+            </div>
+            <div class="py-4">
+                <button type="submit" class="btn btn-primary">
+                    <span class="oi oi-lock-unlocked"></span>
+                    Login
+                </button>
+            </div>
+        </form>
+    </ValidationForm>
+}

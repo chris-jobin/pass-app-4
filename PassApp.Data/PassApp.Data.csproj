@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PassApp.Web\PassApp.Web.csproj" />
+    <ProjectReference Include="..\PassApp.Shared\PassApp.Shared.csproj" />
   </ItemGroup>
 
 </Project>

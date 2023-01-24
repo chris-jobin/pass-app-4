@@ -1,0 +1,84 @@
+﻿@using PassApp.Shared.Buttons
+
+<tbody>
+    @if (Model?.Headers?.Any(x => x.Filter != TableHeaderModel.FilterType.None) ?? false)
+    {
+        <tr>
+            @foreach (var header in Model.Headers)
+            {
+                <td>
+                    @if (header.Filter == TableHeaderModel.FilterType.Text)
+                    {
+                        <input class="form-control form-control-sm" @oninput="@((value) => OnFilterText(Model?.Headers.IndexOf(header) ?? 0, value?.Value?.ToString()))" />
+                    }
+                    @if (header.Filter == TableHeaderModel.FilterType.DropDown)
+                    {
+                        <select class="form-select form-select-sm" @onchange="@((value) => OnFilterText(Model?.Headers.IndexOf(header) ?? 0, value?.Value?.ToString()))">
+                            <option value=""></option>
+                            @foreach (var item in Model?.GetColumnItems(Model.Headers.IndexOf(header)) ?? Enumerable.Empty<string>())
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </select>
+                    }
+                </td>
+            }
+        </tr>
+    }
+    @foreach (var row in (Model?.Items ?? Enumerable.Empty<TableBodyModel>()))
+    {
+        <tr class="align-middle hover-table">
+            @foreach (var cell in (row?.Content ?? Enumerable.Empty<TableCellModel>()))
+            {
+                @if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Link)
+                {
+                    <td class="table-content-overflow">
+                        @if (string.IsNullOrEmpty(cell.Link))
+                        {
+                            @((MarkupString)(cell.Text ?? string.Empty))
+                        }
+                        else
+                        {
+                            <a href="@(cell.Link)" target="_blank">@cell.Text</a>
+                        }
+                    </td>
+                }
+                else if ((Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Button || Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password) && !string.IsNullOrEmpty(cell.Text))
+                {
+                    <td class="table-content-overflow" @onmouseover="@(() => cell.ShowButton = true)" @onmouseleave="@(() => cell.ShowButton = false)">
+                        @if (cell.ShowButton)
+                        {
+                            <Button BtnClass="btn btn-outline-primary btn-sm" BtnText="Copy" OnClick="@(() => CopyToClipboard(cell.Text ?? string.Empty))" />
+                        }
+                        else
+                        {
+                            @if (Model?.Headers?[row?.Content?.IndexOf(cell) ?? 0].Column == TableHeaderModel.ColumnType.Password)
+                            {
+                                @(new string('•', (cell.Text?.Length ?? 0)))
+                            }
+                            else
+                            {
+                                @((MarkupString)(cell.Text ?? string.Empty))
+                            }
+                        }
+                    </td>
+                }
+                else
+                {
+                    <td class="table-content-overflow">
+                        @((MarkupString)(cell.Text ?? string.Empty))
+                    </td>
+                }
+            }
+            @if (Model?.StoredItems?.Any(x => x?.Buttons?.Any() ?? false) ?? false)
+            {
+                <td class="text-right user-selection-none icon-button-no-wrap">
+                    @foreach (var button in (row?.Buttons ?? Enumerable.Empty<IconButtonModel>()))
+                    {
+                        <IconButton IconClass="@button.IconClass" IconText="@button.IconText" OnClick="@(() => OnClick(button.Parameters))" /><span>&nbsp;</span>
+                    }
+                </td>
+            }
+        </tr>
+    }
+</tbody>
