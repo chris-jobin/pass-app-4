@@ -18,6 +18,7 @@ namespace PassApp.Client.Pages
         [Inject]
         public PassAppContext? PassAppContext { get; set; }
         public TableModel? Table { get; set; }
+        public Table? TableRef { get; set; }
         public Modal? ModalRef { get; set; }
         public ItemForm? FormRef { get; set; }
         public ItemFormModel? ItemForm { get; set; }
@@ -52,12 +53,12 @@ namespace PassApp.Client.Pages
                     },
                     Buttons = new List<IconButtonModel>
                     {
-                        new IconButtonModel { IconClass = "oi oi-pencil text-primary", IconText = "View", Parameters = new[] { "view", x.Id.ToString() } }
+                        new IconButtonModel { IconClass = "oi oi-pencil text-primary", IconText = "View", Parameters = new[] { "edit", x.Id.ToString() } }
                     }
                 }).ToListAsync(),
                 FooterButtons = new List<IconButtonModel>
                 {
-                    new IconButtonModel { IconClass = "oi oi-plus text-success", IconText = "Add", Parameters = new[] { "add", Guid.NewGuid().ToString() } }
+                    new IconButtonModel { IconClass = "oi oi-plus text-success", IconText = "Add", Parameters = new[] { "edit", Guid.NewGuid().ToString() } }
                 },
                 HasPaging = true,
                 ItemsPerPage = 10
@@ -66,8 +67,15 @@ namespace PassApp.Client.Pages
 
         protected async Task ListingAction(string[] args)
         {
-            ItemForm = await PassAppContext.GetItemFormModel(args[1]);
-            ModalRef?.Open();
+            if (args[0] == "edit" )
+            {
+                ItemForm = await PassAppContext.GetItemFormModel(args[1]);
+                ModalRef?.Open();
+            }
+            else if (args[0] == "export")
+            {
+
+            }
         }
 
         protected async Task SaveForm()
@@ -76,6 +84,7 @@ namespace PassApp.Client.Pages
             {
                 ModalRef?.Close();
                 Table = await GetTable();
+                await TableRef.Refresh();
             }
         }
 

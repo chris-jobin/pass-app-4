@@ -17,7 +17,7 @@ namespace PassApp.Shared.Table
         [Parameter]
         public EventCallback<string[]> Action { get; set; }
 
-        protected override async Task OnParametersSetAsync()
+        protected override async Task OnInitializedAsync()
         {
             if (Model != null)
             {

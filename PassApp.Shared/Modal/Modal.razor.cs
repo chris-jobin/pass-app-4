@@ -35,13 +35,11 @@ namespace PassApp.Shared.Modal
         public void Open()
         {
             Show = true;
-            StateHasChanged();
         }
 
         public void Close()
         {
             Show = false;
-            StateHasChanged();
         }
 
         protected async Task OnSave()

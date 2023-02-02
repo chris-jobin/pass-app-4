@@ -15,10 +15,28 @@ namespace PassApp.Shared.Table
         public bool HasPaging { get; set; }
         public int ItemsPerPage { get; set; } = 10;
         public int CurrentPage { get; set; } = 1;
-        public int NumberOfPages => (((DisplayItems?.Count + ItemsPerPage - 1) / ItemsPerPage) ?? 1) == 0 ? 1 : ((DisplayItems?.Count + ItemsPerPage - 1) / ItemsPerPage) ?? 1;
+        public int NumberOfPages 
+        {
+            get
+            {
+                return (((DisplayItems?.Count + ItemsPerPage - 1) / ItemsPerPage) ?? 1) == 0 ? 1 : ((DisplayItems?.Count + ItemsPerPage - 1) / ItemsPerPage) ?? 1;
+            }
+        }
         public List<TableBodyModel>? DisplayItems { get; set; }
-        public List<TableBodyModel>? PagedItems => DisplayItems?.Skip((CurrentPage - 1) * ItemsPerPage).Take(ItemsPerPage).ToList();
-        public List<TableBodyModel>? Items => HasPaging ? PagedItems : DisplayItems;
+        public List<TableBodyModel>? PagedItems 
+        {
+            get
+            {
+                return DisplayItems?.Skip((CurrentPage - 1) * ItemsPerPage).Take(ItemsPerPage).ToList();
+            } 
+        }
+        public List<TableBodyModel>? Items 
+        {
+            get
+            {
+                return HasPaging ? PagedItems : DisplayItems;
+            }
+        }
 
         public void Sort(int index)
         {

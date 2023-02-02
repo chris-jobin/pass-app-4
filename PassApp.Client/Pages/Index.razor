@@ -3,7 +3,7 @@
 @using PassApp.Shared.Table;
 @page "/"
 
-<Table Model="Table" Action="ListingAction" />
+<Table @ref="TableRef" Model="Table" Action="ListingAction" />
 
 <Modal @ref="ModalRef" Centered Save="SaveForm">
     <ItemForm @ref="FormRef" Model="ItemForm" OnDelete="Delete" />
