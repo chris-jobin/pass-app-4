@@ -74,10 +74,6 @@ namespace PassApp.Client.Pages
                 ItemForm = await PassAppContext.GetItemFormModel(args[1]);
                 ModalRef?.Open();
             }
-            else if (args[0] == "export")
-            {
-
-            }
         }
 
         protected async Task SaveForm()
