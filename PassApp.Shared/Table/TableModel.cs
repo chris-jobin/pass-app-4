@@ -10,7 +10,17 @@ namespace PassApp.Shared.Table
     public class TableModel
     {
         public List<TableHeaderModel>? Headers { get; set; }
-        public List<TableBodyModel>? StoredItems { get; set; }
+
+        private List<TableBodyModel>? _storedItems;
+        public List<TableBodyModel>? StoredItems 
+        {
+            get { return _storedItems; }
+            set
+            {
+                _storedItems = value;
+                DisplayItems = _storedItems;
+            }
+        }
         public List<IconButtonModel>? FooterButtons { get; set; }
         public bool HasPaging { get; set; }
         public int ItemsPerPage { get; set; } = 10;

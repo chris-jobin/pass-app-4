@@ -30,7 +30,7 @@ namespace PassApp.Client.Pages
 
         protected async Task<TableModel> GetTable()
         {
-            var result =  new TableModel
+            return new TableModel
             {
                 Headers = new List<TableHeaderModel>
                 {
@@ -63,8 +63,6 @@ namespace PassApp.Client.Pages
                 HasPaging = true,
                 ItemsPerPage = 10
             };
-            result.DisplayItems = result.StoredItems;
-            return result;
         }
 
         protected async Task ListingAction(string[] args)
