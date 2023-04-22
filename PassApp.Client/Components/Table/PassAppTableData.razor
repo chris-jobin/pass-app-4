@@ -1,0 +1,41 @@
+﻿
+@if (AllowCopy && !string.IsNullOrEmpty(Value))
+{
+    <td class="table-content-overflow" @onmouseenter="ShowButton" @onmouseleave="HideButton">
+        @if (!string.IsNullOrEmpty(Value) && ShowCopyButton)
+        {
+            <button class="btn btn-outline-primary btn-sm" @onclick="Copy">Copy</button>
+        }
+        else
+        {
+            @if (ChildContent != null)
+            {
+                @ChildContent
+            }
+            else
+            {
+                @Value
+            }
+        }
+    </td>
+}
+else
+{
+    <td>
+        @if (!string.IsNullOrEmpty(Link) && !string.IsNullOrEmpty(Value))
+        {
+            <a href="@Link" target="_blank">@Value</a>
+        }
+        else
+        {
+            @if (ChildContent != null)
+            {
+                @ChildContent
+            }
+            else
+            {
+                @Value
+            }
+        }
+    </td>
+}

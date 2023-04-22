@@ -17,10 +17,6 @@ main {
     align-items: center;
 }
 
-.unset-all {
-    all: unset;
-}
-
 .pointer:hover {
     cursor: pointer;
 }
@@ -45,10 +41,6 @@ tr.hover-table:hover {
 
 .user-selection-none {
     user-select: none;
-}
-
-.icon-button-no-wrap {
-    white-space: nowrap;
 }
 
 input::-ms-reveal, input::-ms-clear {

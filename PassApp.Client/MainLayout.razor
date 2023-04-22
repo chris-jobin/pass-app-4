@@ -1,21 +1,18 @@
-﻿@using PassApp.Shared.Authorization
-@inherits LayoutComponentBase
+﻿@inherits LayoutComponentBase
 
 <div class="page">
     <main>
-        <AuthorizationComponent @ref="AuthRef">
-            <div class="top-row px-4">
-                <button class="btn btn-light text-danger" @onclick="AuthRef.DeleteProfile">Delete Profile</button><span>&nbsp;</span>
-                <button class="btn btn-light text-primary" @onclick="AuthRef.UnAuthorize">Logout</button>
-            </div>
+        <div class="top-row px-4">
+            <button class="btn btn-light text-danger">Delete Profile</button><span>&nbsp;</span>
+            <button class="btn btn-light text-primary">Logout</button>
+        </div>
 
-            <article class="content px-4">
-                @Body
-            </article>
-        </AuthorizationComponent>
+        <article class="content px-4">
+            @Body
+        </article>
     </main>
 </div>
 
 @code {
-    public AuthorizationComponent? AuthRef { get; set; }
+
 }

@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassApp.Data", "PassApp.Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PassApp.Client", "PassApp.Client\PassApp.Client.csproj", "{EC061D8E-836A-4791-BDE4-2F3E2313E660}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassApp.Shared", "PassApp.Shared\PassApp.Shared.csproj", "{38019B44-9666-4D5C-A4E4-74FF3036E815}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{EC061D8E-836A-4791-BDE4-2F3E2313E660}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC061D8E-836A-4791-BDE4-2F3E2313E660}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC061D8E-836A-4791-BDE4-2F3E2313E660}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38019B44-9666-4D5C-A4E4-74FF3036E815}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38019B44-9666-4D5C-A4E4-74FF3036E815}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38019B44-9666-4D5C-A4E4-74FF3036E815}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38019B44-9666-4D5C-A4E4-74FF3036E815}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

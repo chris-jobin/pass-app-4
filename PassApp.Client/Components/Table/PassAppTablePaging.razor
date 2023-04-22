@@ -1,0 +1,15 @@
+﻿
+<hr />
+<div class="d-flex user-selection-none">
+    @if (CurrentPage != 1)
+    {
+        <div class="p-1"><i class="oi oi-media-step-backward text-primary pointer hover-dim" @onclick="@(() => CurrentPageChanged(1))"></i></div>
+        <div class="p-1"><i class="oi oi-media-skip-backward text-primary pointer hover-dim" @onclick="@(() => CurrentPageChanged(CurrentPage - 1))"></i></div>
+    }
+    <div class="p-1"><strong>@CurrentPage</strong> of @NumberOfPages</div>
+    @if (CurrentPage != NumberOfPages)
+    {
+        <div class="p-1"><i class="oi oi-media-skip-forward text-primary pointer hover-dim" @onclick="@(() => CurrentPageChanged(CurrentPage + 1))"></i></div>
+        <div class="p-1"><i class="oi oi-media-step-forward text-primary pointer hover-dim" @onclick="@(() => CurrentPageChanged(NumberOfPages))"></i></div>
+    }
+</div>

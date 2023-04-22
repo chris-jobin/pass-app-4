@@ -12,11 +12,26 @@ namespace PassApp.Data
     {
         public DbSet<User> Users { get; set; }
 
+        public async Task<User> GetUser(string username, string password)
+        {
+            User user = null;
+            try
+            {
+                var encryptedPassword = password; // TODO : password encryption
+                user = await Users.SingleOrDefaultAsync(x =>
+                        x.UserName == username &&
+                        x.Password == encryptedPassword);
+            }
+            catch (Exception)
+            {
+            }
+            return user;
+        }
         public async Task<bool> Login(string username, string password)
         {
             try
             {
-                var user = await Users.SingleOrDefaultAsync(x => x.UserName == username && x.Password == password);
+                var user = await GetUser(username, password);
                 return user != null;
             }
             catch (Exception)
@@ -24,43 +39,15 @@ namespace PassApp.Data
                 return false;
             }
         }
-
-        public async Task<bool> Register(string username, string password)
-        {
-            try
-            {
-                if (await Users.AnyAsync())
-                    return false;
-
-                var user = new User
-                {
-                    Id = Guid.NewGuid(),
-                    Created= DateTime.Now,
-                    UserName = username,
-                    Password = password
-                };
-                await Users.AddAsync(user);
-                await SaveChangesAsync();
-
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
         public async Task<bool> DeleteUser()
         {
             try
             {
                 var user = await Users.FirstAsync();
                 var records = await Records.ToListAsync();
-
                 Users.Remove(user);
                 Records.RemoveRange(records);
                 await SaveChangesAsync();
-
                 return true;
             }
             catch (Exception)

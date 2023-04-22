@@ -10,7 +10,7 @@ function UpdateItemsPerPage(dotnethelper) {
         var table = document.querySelector("table");
         var rows = table.querySelectorAll("tr");
         var rowHeight = rows[0].offsetHeight;
-        var itemsPerPage = Math.floor(viewHeight / rowHeight) - 10;
+        var itemsPerPage = Math.floor(viewHeight / rowHeight) - 6;
         dotnethelper.invokeMethodAsync("UpdateItemsPerPage", itemsPerPage);
     }
 }

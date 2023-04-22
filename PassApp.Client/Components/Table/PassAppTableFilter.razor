@@ -1,0 +1,17 @@
+﻿
+<th>
+    @if (DropDownItems != null)
+    {
+        <select class="form-control form-control-sm" @onchange="@((e) => Input(e.Value.ToString()))">
+            <option value=""></option>
+            @foreach (var item in DropDownItems)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+    }
+    else if (!string.IsNullOrEmpty(Property))
+    {
+        <input class="form-control form-control-sm" @oninput="@((e) => Input(e.Value.ToString()))" />
+    }
+</th>

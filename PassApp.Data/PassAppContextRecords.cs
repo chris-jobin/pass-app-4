@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PassApp.Data.Models;
-using PassApp.Shared.Form;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,72 +12,29 @@ namespace PassApp.Data
     {
         public DbSet<Record> Records { get; set; }
 
-        private async Task<List<string>> GetDistinctCategories() => await Records.Select(x => x.Category).Distinct().ToListAsync();
-
-        public async Task<ItemFormModel> GetItemFormModel(string id)
-        {
-            var record = await Records.SingleOrDefaultAsync(x => x.Id.ToString() == id);
-
-            return new ItemFormModel
-            {
-                Id = record?.Id ?? Guid.Parse(id),
-                Categories = await GetDistinctCategories(),
-                Category = record?.Category,
-                Title = record?.Title,
-                Link = record?.Link,
-                Username = record?.Username,
-                Email = record?.Email,
-                Password = record?.Password,
-                Notes = record?.Notes
-            };
-        }
-
-        public async Task<bool> SetItemFormModel(ItemFormModel model)
+        public async Task<Record> GetRecord(Guid id) => await Records.FindAsync(id);
+        public async Task<List<string>> GetDistinctCategories() => await Records.Select(x => x.Category).Distinct().ToListAsync();
+        public async Task<bool> SetRecord(Record model)
         {
             try
             {
-                var record = await Records.FindAsync(model.Id);
-
+                var record = await GetRecord(model.Id);
                 if (record == null)
                 {
                     record = new Record
                     {
-                        Id = model.Id,
-                        Created = DateTime.Now,
+                        Id = Guid.NewGuid(),
+                        Created = DateTime.Now
                     };
                     await Records.AddAsync(record);
                 }
-
                 record.Category = model.Category;
                 record.Title = model.Title;
                 record.Link = model.Link;
-                record.Email = model.Email;
                 record.Username = model.Username;
+                record.Email = model.Email;
                 record.Password = model.Password;
                 record.Notes = model.Notes;
-
-                await SaveChangesAsync();
-
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public async Task<bool> DeleteRecord(string id)
-        {
-            try
-            {
-                var record = await Records.FindAsync(Guid.Parse(id));
-
-                if (record != null)
-                {
-                    Records.Remove(record);
-                    await SaveChangesAsync();
-                }
-
                 return true;
             }
             catch (Exception)

@@ -1,0 +1,49 @@
+﻿
+@if (_Records != null)
+{
+    <CascadingValue Value="this">
+        <table class="table table-borderless table-sm">
+            <thead>
+                <PassAppTableHeader Header="Category" Width="20" OnSort="OnSort" Filterable Property="Category" DropDownItems="Categories"/>
+                <PassAppTableHeader Header="Title" Width="20" OnSort="OnSort" Filterable Property="Title" />
+                <PassAppTableHeader Header="Username" Width="20" OnSort="OnSort" Filterable Property="Username" />
+                <PassAppTableHeader Header="Email" Width="20" OnSort="OnSort" Filterable Property="Email"/>
+                <PassAppTableHeader Header="Password" Width="20"/>
+                <PassAppTableHeader/>
+            </thead>
+            <tbody>
+                <tr>
+                    @foreach (var header in Headers)
+                    {
+                        <PassAppTableFilter OnInput="OnFilter" Property="@header.Property" DropDownItems="header.DropDownItems"/>
+                    }
+                </tr>
+                @foreach (var record in PagedRecords)
+                {
+                    <tr class="hover-table">
+                        <PassAppTableData>@record?.Category</PassAppTableData>
+                        <PassAppTableData Value="@record?.Title" Link="@record?.Link"/>
+                        <PassAppTableData Value="@record?.Username" AllowCopy/>
+                        <PassAppTableData Value="@record?.Email" AllowCopy/>
+                        <PassAppTableData Value="@record?.Password" AllowCopy>
+                            @(new string('•', record?.Password.Length ?? 0))
+                        </PassAppTableData>
+                        <PassAppTableData>
+                            <div class="d-flex text-right">
+                                <i class="oi oi-pencil text-primary pointer hover-dim"></i>
+                            </div>
+                        </PassAppTableData>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="@Headers.Count" class="text-right">
+                        <i class="oi oi-plus text-success pointer hover-dim"></i>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <PassAppTablePaging CurrentPage="CurrentPage" NumberOfPages="@NumberOfPages" OnCurrentPageChanged="ChangePage"/>
+    </CascadingValue>
+}

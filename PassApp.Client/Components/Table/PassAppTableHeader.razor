@@ -1,0 +1,17 @@
+﻿
+<th class="user-selection-none" style="@WidthStyle">
+    @if (OnSort.HasDelegate)
+    {
+        <span class="pointer" @onclick="Sort">
+            @Header
+            @if (Direction != SortDirection.None)
+            {
+                <i class="@SortIcon px-1"></i>
+            }
+        </span>
+    }
+    else
+    {
+        @Header
+    }
+</th>
