@@ -1,0 +1,31 @@
+﻿
+@if (Show)
+{
+    <div class="modal show d-block" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-@Size modal-dialog-scrollable @CenteredClass" role="document">
+            <div class="modal-content shadow">
+                <div class="modal-body">
+                    @ChildContent
+                </div>
+                @if (!HideFooter)
+                {
+                    <div class="py-1 modal-footer">
+                        <button class="btn btn-secondary" disabled="@IsOperating" @onclick="Close">Close</button>
+                        @if (OnSave.HasDelegate)
+                        {
+                            <button class="btn btn-primary" disabled="@IsOperating" @onclick="OnSave">
+                                @if (IsOperating)
+                                {
+                                    <span class="spinner-border spinner-border-sm"></span>
+                                }
+                                Save
+                            </button>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-backdrop show"></div>
+}

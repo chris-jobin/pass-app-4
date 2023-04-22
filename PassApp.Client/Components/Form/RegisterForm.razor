@@ -1,0 +1,24 @@
+﻿
+@if (Model != null)
+{
+    <form>
+        <div class="py-1">
+            <Label For="@(() => Model.Username)" />
+            <input type="text" class="form-control" @bind-value="Model.Username" />
+        </div>
+        <div class="py-1">
+            <Label For="@(() => Model.Password)" />
+            <PasswordComponent @bind-Value="Model.Password" />
+        </div>
+        <div class="py-1">
+            <Label For="@(() => Model.ConfirmPassword)" />
+            <PasswordComponent @bind-Value="Model.ConfirmPassword" />
+        </div>
+        <div class="py-4">
+            <button class="btn btn-primary" @onclick="Register">
+                <span class="oi oi-person"></span>
+                Register
+            </button>
+        </div>
+    </form>
+}

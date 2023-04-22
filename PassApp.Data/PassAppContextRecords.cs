@@ -35,6 +35,7 @@ namespace PassApp.Data
                 record.Email = model.Email;
                 record.Password = model.Password;
                 record.Notes = model.Notes;
+                await SaveChangesAsync();
                 return true;
             }
             catch (Exception)

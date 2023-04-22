@@ -39,6 +39,26 @@ namespace PassApp.Data
                 return false;
             }
         }
+        public async Task<bool> RegisterUser(string username, string password)
+        {
+            try
+            {
+                var user = new User
+                {
+                    Id = Guid.NewGuid(),
+                    UserName = username,
+                    Password = password,
+                    Created = DateTime.Now
+                };
+                await Users.AddAsync(user);
+                await SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         public async Task<bool> DeleteUser()
         {
             try

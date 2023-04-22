@@ -2,17 +2,15 @@
 
 <div class="page">
     <main>
-        <div class="top-row px-4">
-            <button class="btn btn-light text-danger">Delete Profile</button><span>&nbsp;</span>
-            <button class="btn btn-light text-primary">Logout</button>
-        </div>
+        <AuthorizationComponent @ref="Auth">
+            <div class="top-row px-4">
+                <button class="btn btn-light text-danger mx-1" @onclick="Delete">Delete Profile</button>
+                <button class="btn btn-light text-primary mx-1" @onclick="Logout">Logout</button>
+            </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
+            <article class="content px-4">
+                @Body
+            </article>
+        </AuthorizationComponent>
     </main>
 </div>
-
-@code {
-
-}
