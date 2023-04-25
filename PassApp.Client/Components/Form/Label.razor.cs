@@ -17,6 +17,8 @@ namespace PassApp.Client.Components.Form
         public Expression<Func<object>> For { get; set; }
         [Parameter]
         public string Id { get; set; }
+        [Parameter]
+        public string CssClass { get; set; }
         public string Text { get; set; }
 
         protected override async Task OnInitializedAsync()

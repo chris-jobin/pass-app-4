@@ -12,10 +12,11 @@ namespace PassApp.Client.Components.Form
         [Parameter]
         public EventCallback<RegisterModel> OnRegister { get; set; }
         public RegisterModel Model { get; set; } = new();
+        public Validation.Form FormRef { get; set; }
 
         private async Task Register()
         {
-            if (OnRegister.HasDelegate)
+            if (FormRef.Validate() && OnRegister.HasDelegate)
                 await OnRegister.InvokeAsync(Model);
         }
     }

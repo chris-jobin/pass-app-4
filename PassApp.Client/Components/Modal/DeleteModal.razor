@@ -1,0 +1,21 @@
+﻿
+<PassAppModal @ref="ModalRef" Size="md" HideFooter>
+    <div class="alert alert-danger border border-danger text-center">
+        <i class="oi oi-warning d-block p-1"></i>
+        <strong>@Text</strong>
+    </div>
+    @if (RequireConfirmation)
+    {
+        <Form @ref="FormRef" Model="Model">
+            <div class="p-1">
+                <small>Write "@(Model.ConfirmationTextSource)" to confirm the deletion.</small>
+                <input type="text" placeholder="@Model.ConfirmationTextSource" class="form-control" @bind-value="Model.ConfirmationText" />
+                <FormMessage For="@(() => Model.ConfirmationTextMatch)"/>
+            </div>
+        </Form>
+    }
+    <div class="p-2 text-right">
+        <button class="btn btn-secondary" @onclick="Close">Close</button>
+        <button class="btn btn-danger" @onclick="Delete">Delete</button>
+    </div>
+</PassAppModal>

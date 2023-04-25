@@ -12,6 +12,7 @@ namespace PassApp.Client.Components.Form
         [Parameter]
         public EventCallback<LoginModel> OnLogin { get; set; }
         public LoginModel Model { get; set; } = new();
+        public Validation.Form FormRef { get; set; }
 
         protected async Task Login()
         {

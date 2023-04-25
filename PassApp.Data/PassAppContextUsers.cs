@@ -65,8 +65,8 @@ namespace PassApp.Data
             {
                 var user = await Users.FirstAsync();
                 var records = await Records.ToListAsync();
-                Users.Remove(user);
                 Records.RemoveRange(records);
+                Users.Remove(user);
                 await SaveChangesAsync();
                 return true;
             }

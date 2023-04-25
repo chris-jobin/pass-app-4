@@ -2,7 +2,7 @@
 @if (_Records != null)
 {
     <CascadingValue Value="this">
-        <table class="table table-borderless table-sm">
+        <table class="table table-borderless">
             <thead>
                 <PassAppTableHeader Header="Category" Width="20" OnSort="OnSort" Filterable Property="Category" DropDownItems="Categories"/>
                 <PassAppTableHeader Header="Title" Width="20" OnSort="OnSort" Filterable Property="Title" />
@@ -21,7 +21,7 @@
                 @foreach (var record in PagedRecords)
                 {
                     <tr class="hover-table">
-                        <PassAppTableData>@record?.Category</PassAppTableData>
+                        <PassAppTableData Value="@record?.Category"/>
                         <PassAppTableData Value="@record?.Title" Link="@record?.Link"/>
                         <PassAppTableData Value="@record?.Username" AllowCopy/>
                         <PassAppTableData Value="@record?.Email" AllowCopy/>

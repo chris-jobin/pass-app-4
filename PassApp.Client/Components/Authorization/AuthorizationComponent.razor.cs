@@ -21,7 +21,9 @@ namespace PassApp.Client.Components.Authorization
         private bool HasUser { get; set; }
         public bool IsError { get; set; }
         public MessageComponent Message { get; set; }
-        public PassAppModal Delete { get; set; }
+        public DeleteModal DeleteRef { get; set; }
+        public LoginForm LoginRef { get; set; }
+        public RegisterForm RegisterRef { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -33,10 +35,13 @@ namespace PassApp.Client.Components.Authorization
 
         private async Task Login(LoginModel model)
         {
-            if (await Context.Login(model.Username, model.Password))
-                Authorize();
-            else
-                await Message.SetMessage("Login Error", null, MessageType.Error);
+            if (LoginRef.FormRef.Validate())
+            {
+                if (await Context.Login(model.Username, model.Password))
+                    Authorize();
+                else
+                    await Message.SetMessage("Login Error", null, MessageType.Error);
+            }
         }
 
         private async Task Register(RegisterModel model)
@@ -47,8 +52,7 @@ namespace PassApp.Client.Components.Authorization
                 await Message.SetMessage("Register Error", null, MessageType.Error);
         }
 
-        public void DeleteProfile() => Delete.Open();
-        private void DeleteClose() => Delete.Close();
+        public void DeleteProfile() => DeleteRef.Open();
         private async Task OnDeleteProfile()
         {
             if (await Context.DeleteUser())

@@ -1,24 +1,31 @@
 ﻿
 @if (Model != null)
 {
-    <form>
-        <div class="py-1">
-            <Label For="@(() => Model.Username)" />
-            <input type="text" class="form-control" @bind-value="Model.Username" />
-        </div>
-        <div class="py-1">
-            <Label For="@(() => Model.Password)" />
-            <PasswordComponent @bind-Value="Model.Password" />
-        </div>
-        <div class="py-1">
-            <Label For="@(() => Model.ConfirmPassword)" />
-            <PasswordComponent @bind-Value="Model.ConfirmPassword" />
-        </div>
-        <div class="py-4">
-            <button class="btn btn-primary" @onclick="Register">
-                <span class="oi oi-person"></span>
-                Register
-            </button>
-        </div>
-    </form>
+    <Form @ref="FormRef" Model="Model">
+        <form @onsubmit="Register">
+            <div class="py-1">
+                <Label For="@(() => Model.Username)" />
+                <input type="text" class="form-control" @bind-value="Model.Username" />
+                <FormMessage For="@(() => Model.Username)" />
+            </div>
+            <div class="py-1">
+                <Label For="@(() => Model.Password)" />
+                <PasswordComponent @bind-Value="Model.Password" />
+                <FormMessage For="@(() => Model.Password)" />
+                <FormMessage For="@(() => Model.PasswordsMatch)" />
+            </div>
+            <div class="py-1">
+                <Label For="@(() => Model.ConfirmPassword)" />
+                <PasswordComponent @bind-Value="Model.ConfirmPassword" />
+                <FormMessage For="@(() => Model.ConfirmPassword)" />
+                <FormMessage For="@(() => Model.PasswordsMatch)" />
+            </div>
+            <div class="py-4">
+                <button type="submit" class="btn btn-primary">
+                    <span class="oi oi-person"></span>
+                    Register
+                </button>
+            </div>
+        </form>
+    </Form>
 }
