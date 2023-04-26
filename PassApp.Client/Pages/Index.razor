@@ -1,3 +1,7 @@
 ﻿@page "/"
 
-<PassAppTable Records="Records" Categories="Categories"/>
+<PassAppTable Records="Records" Categories="Categories" OnAction="TableAction"/>
+
+<PassAppModal @ref="ModalRef" Centered OnSave="SaveRecord">
+    <RecordForm @ref="FormRef" Id="@Id" OnSave="Refresh"/>
+</PassAppModal>

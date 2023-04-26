@@ -1,0 +1,44 @@
+﻿
+@if (Model != null)
+{
+    <Form @ref="FormRef" Model="Model">
+        <FormRow For="@(() => Model.Category)" Id="record-category">
+            <CategoriesComponent @bind-Value="Model.Category"/>
+            <FormMessage For="@(() => Model.Category)"/>
+        </FormRow>
+        <FormRow For="@(() => Model.Title)" Id="record-title">
+            <input type="text" id="record-title" class="form-control" @bind-value="Model.Title"/>
+            <FormMessage For="@(() => Model.Title)"/>
+        </FormRow>
+        <FormRow For="@(() => Model.Link)" Id="record-link">
+            <input type="text" id="record-link" class="form-control" @bind-value="Model.Link"/>
+            <FormMessage For="@(() => Model.Link)"/>
+        </FormRow>
+        <FormRow For="@(() => Model.Username)" Id="record-username">
+            <input type="text" id="record-username" class="form-control" @bind-value="Model.Username"/>
+            <FormMessage For="@(() => Model.Username)"/>
+            <FormMessage For="@(() => Model.UsernameOrEmail)"/>
+        </FormRow>
+        <FormRow For="@(() => Model.Email)" Id="record-email">
+            <input type="text" id="record-email" class="form-control" @bind-value="Model.Email"/>
+            <FormMessage For="@(() => Model.Email)"/>
+            <FormMessage For="@(() => Model.UsernameOrEmail)"/>
+        </FormRow>
+        <FormRow For="@(() => Model.Password)" Id="record-password">
+            <NewPasswordComponent @bind-Value="Model.Password"/>
+            <FormMessage For="@(() => Model.Password)"/>
+        </FormRow>
+        <FormRow For="@(() => Model.Notes)" Id="record-notes">
+            <textarea id="record-notes" class="form-control" rows="3" @bind="Model.Notes"/>
+        </FormRow>
+        <div class="row mb-3">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-8">
+                <button class="btn btn-danger btn-sm" @onclick="Delete">Delete</button>
+            </div>
+        </div>
+    </Form>
+
+    <DeleteModal @ref="DeleteRef" Text="Are you sure you want to delete this record?" OnDelete="OnDelete" />
+}

@@ -18,6 +18,8 @@ namespace PassApp.Client.Components.Table
         public List<Record> Records { get; set; }
         [Parameter]
         public List<string> Categories { get; set; }
+        [Parameter]
+        public EventCallback<string> OnAction { get; set; }
         private List<Record> _Records { get; set; }
         private List<PassAppTableHeader> Headers { get; set; } = new();
         private List<PassAppTableFilter> Filters { get; set; } = new();
@@ -29,6 +31,8 @@ namespace PassApp.Client.Components.Table
         protected override async Task OnParametersSetAsync()
         {
             _Records = Records;
+            _Records = Filter();
+            _Records = CurrentSort();
             await Task.Yield();
         }
 
@@ -50,6 +54,12 @@ namespace PassApp.Client.Components.Table
         public void AddFilter(PassAppTableFilter filter) 
         { 
             Filters.Add(filter);
+        }
+
+        private async Task Action(string value)
+        {
+            if (OnAction.HasDelegate)
+                await OnAction.InvokeAsync(value);
         }
 
         private void OnFilter()

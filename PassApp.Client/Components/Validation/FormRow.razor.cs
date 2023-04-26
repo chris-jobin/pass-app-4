@@ -17,7 +17,9 @@ namespace PassApp.Client.Components.Validation
         [Parameter]
         public Expression<Func<object>> For { get; set; }
         [Parameter]
-        public int LabelWidth { get; set; }
+        public string Id { get; set; }
+        [Parameter]
+        public int LabelWidth { get; set; } = 4;
         private string LabelCssClass => $"col-sm-{LabelWidth} col-form-label";
 
         protected override async Task OnInitializedAsync()

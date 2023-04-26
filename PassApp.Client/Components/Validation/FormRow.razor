@@ -1,6 +1,8 @@
 ﻿
 <div class="row mb-3">
-    <Label For="For" CssClass="@LabelCssClass" />
+    <div class="col-sm-@(LabelWidth)">
+        <Label For="For" Id="@Id" CssClass="@LabelCssClass" />
+    </div>
     <div class="col-sm-@(12 - LabelWidth)">
         @ChildContent
     </div>

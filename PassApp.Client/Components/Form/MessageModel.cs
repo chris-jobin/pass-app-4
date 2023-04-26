@@ -16,6 +16,7 @@ namespace PassApp.Client.Components.Form
         {
             MessageType.Success => "alert alert-success border border-success",
             MessageType.Error => "alert alert-danger border border-danger",
+            MessageType.Warning => "alert alert-warning border border-warning",
             _ => ""
         };
     }
@@ -23,6 +24,7 @@ namespace PassApp.Client.Components.Form
     public enum MessageType
     {
         Success,
-        Error
+        Error,
+        Warning
     }
 }

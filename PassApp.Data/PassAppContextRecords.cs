@@ -12,7 +12,7 @@ namespace PassApp.Data
     {
         public DbSet<Record> Records { get; set; }
 
-        public async Task<Record> GetRecord(Guid id) => await Records.FindAsync(id);
+        public async Task<Record> GetRecord(Guid? id) => await Records.FindAsync(id);
         public async Task<List<string>> GetDistinctCategories() => await Records.Select(x => x.Category).Distinct().ToListAsync();
         public async Task<bool> SetRecord(Record model)
         {
@@ -36,6 +36,23 @@ namespace PassApp.Data
                 record.Password = model.Password;
                 record.Notes = model.Notes;
                 await SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public async Task<bool> DeleteRecord(Guid id)
+        {
+            try
+            {
+                var record = await Records.FindAsync(id);
+                if (record != null)
+                {
+                    Records.Remove(record);
+                    await SaveChangesAsync();
+                }
                 return true;
             }
             catch (Exception)

@@ -30,7 +30,7 @@
                         </PassAppTableData>
                         <PassAppTableData>
                             <div class="d-flex text-right">
-                                <i class="oi oi-pencil text-primary pointer hover-dim"></i>
+                                <i class="oi oi-pencil text-primary pointer hover-dim" @onclick="@(() => Action(record.Id.ToString()))"></i>
                             </div>
                         </PassAppTableData>
                     </tr>
@@ -39,7 +39,7 @@
             <tfoot>
                 <tr>
                     <td colspan="@Headers.Count" class="text-right">
-                        <i class="oi oi-plus text-success pointer hover-dim"></i>
+                        <i class="oi oi-plus text-success pointer hover-dim" @onclick="@(() => Action(string.Empty))"></i>
                     </td>
                 </tr>
             </tfoot>

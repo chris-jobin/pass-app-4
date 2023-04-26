@@ -1,0 +1,27 @@
+﻿
+<div class="input-group">
+    @if (ShowCategories)
+    {
+        <select class="form-select" @onchange="@((e) => OnValueChanged(e.Value.ToString()))">
+            <option value="" selected disabled hidden>Select</option>
+            @foreach (var category in Categories ?? Enumerable.Empty<string>())
+            {
+                @if (Value == category)
+                {
+                    <option value="@category" selected>@category</option>
+                }
+                else
+                {
+                    <option value="@category">@category</option>
+                }
+            }
+        </select>
+    }
+    else
+    {
+        <input type="text" autocomplete="on" class="form-control" value="@Value" @onchange="@((e) => OnValueChanged(e.Value.ToString()))"/>
+    }
+    <button class="btn @ButtonCssClass" @onclick="Toggle">
+        <span class="oi oi-list"></span>
+    </button>
+</div>
