@@ -26,7 +26,6 @@ namespace PassApp.Client.Components.Validation
         {
             if (Form == null)
                 throw new NullReferenceException($"{this.GetType().Name} must be within {Form.GetType().Name}");
-            Form.AddRow(this);
             await Task.Yield();
         }
     }

@@ -13,8 +13,6 @@ namespace PassApp.Client.Components.Validation
         public RenderFragment ChildContent { get; set; }
         [Parameter]
         public object Model { get; set; }
-
-        protected List<FormRow> Rows { get; set; } = new List<FormRow>();
         protected List<FormMessage> Messages { get; set; } = new List<FormMessage>();
 
         protected override async Task OnInitializedAsync()
@@ -23,8 +21,6 @@ namespace PassApp.Client.Components.Validation
                 throw new NullReferenceException($"{this.GetType()} requires a Model as a parameter.");
             await Task.Yield();
         }
-
-        public void AddRow(FormRow row) => Rows.Add(row);
         public void AddMessage(FormMessage message) => Messages.Add(message);
 
         public bool Validate()
