@@ -14,7 +14,7 @@ namespace PassApp.Data
 
         public async Task<List<string>> GetDistinctCategories() => await Records.Select(x => x.Category).Distinct().ToListAsync();
         public async Task<Record> GetRecord(Guid? id) => await Records.FindAsync(id);
-        public async Task<Record> GetRecordForDisplay(Guid? id)
+        public async Task<Record> GetRecordForDisplay(Guid id)
         {
             var record = await Records.FindAsync(id);
             if (record == null)
@@ -23,6 +23,19 @@ namespace PassApp.Data
             result.Password = PassAppEncryption.PassAppEncryption.Decrypt(record.Password);
             return result;
         }
+        public async Task<List<Record>> GetRecords() =>
+            await Records
+            .Select(x => new Record
+            {
+                Id = x.Id,
+                Category = x.Category,
+                Title = x.Title,
+                Link = x.Link,
+                Username = x.Username,
+                Email = x.Email,
+                Password = PassAppEncryption.PassAppEncryption.Decrypt(x.Password),
+                Notes = x.Notes
+            }).ToListAsync();
         public async Task<bool> SetRecord(Record model)
         {
             try

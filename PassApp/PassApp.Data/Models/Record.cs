@@ -21,12 +21,15 @@ namespace PassApp.Data.Models
         {
             return new Record
             {
+                Id = this.Id,
                 Category = this.Category,
                 Title = this.Title,
                 Link = this.Link,
+                Username = this.Username,
                 Email = this.Email,
                 Password = this.Password,
-                Notes = this.Notes
+                Notes = this.Notes,
+                Created = this.Created,
             };
         }
 

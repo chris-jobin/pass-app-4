@@ -21,7 +21,7 @@ namespace PassApp.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            Records = await Context.Records.ToListAsync();
+            Records = await Context.GetRecords();
             Categories = await Context.GetDistinctCategories();
         }
 
@@ -35,7 +35,7 @@ namespace PassApp.Client.Pages
         }
         private async Task Refresh()
         {
-            Records = await Context.Records.ToListAsync();
+            Records = await Context.GetRecords();
             Categories = await Context.GetDistinctCategories();
             Close();
         }
