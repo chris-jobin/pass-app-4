@@ -17,6 +17,19 @@ namespace PassApp.Data.Models
         public string Password { get; set; }
         public string Notes { get; set; }
 
+        public Record Clone()
+        {
+            return new Record
+            {
+                Category = this.Category,
+                Title = this.Title,
+                Link = this.Link,
+                Email = this.Email,
+                Password = this.Password,
+                Notes = this.Notes
+            };
+        }
+
         public string GetPropertyValue(string name)
         {
             var property = this.GetType().GetProperty(name);

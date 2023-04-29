@@ -11,4 +11,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="PassAppEncryption">
+      <HintPath>..\libs\PassAppEncryption.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

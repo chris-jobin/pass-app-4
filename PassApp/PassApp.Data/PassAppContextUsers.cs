@@ -17,7 +17,7 @@ namespace PassApp.Data
             User user = null;
             try
             {
-                var encryptedPassword = password; // TODO : password encryption
+                var encryptedPassword = PassAppEncryption.PassAppEncryption.Encrypt(password);
                 user = await Users.SingleOrDefaultAsync(x =>
                         x.UserName == username &&
                         x.Password == encryptedPassword);
@@ -43,11 +43,12 @@ namespace PassApp.Data
         {
             try
             {
+                var encryptedPassword = PassAppEncryption.PassAppEncryption.Encrypt(password);
                 var user = new User
                 {
                     Id = Guid.NewGuid(),
                     UserName = username,
-                    Password = password,
+                    Password = encryptedPassword,
                     Created = DateTime.Now
                 };
                 await Users.AddAsync(user);

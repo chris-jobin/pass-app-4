@@ -25,7 +25,7 @@ namespace PassApp.Client.Components.Form
         protected override async Task OnInitializedAsync()
         {
             var id = Guid.TryParse(Id, out var guid) ? guid : Guid.NewGuid();
-            var record = await Context.GetRecord(id);
+            var record = await Context.GetRecordForDisplay(id);
             Model = new RecordModel(record);
         }
 

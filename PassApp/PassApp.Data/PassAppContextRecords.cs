@@ -12,8 +12,17 @@ namespace PassApp.Data
     {
         public DbSet<Record> Records { get; set; }
 
-        public async Task<Record> GetRecord(Guid? id) => await Records.FindAsync(id);
         public async Task<List<string>> GetDistinctCategories() => await Records.Select(x => x.Category).Distinct().ToListAsync();
+        public async Task<Record> GetRecord(Guid? id) => await Records.FindAsync(id);
+        public async Task<Record> GetRecordForDisplay(Guid? id)
+        {
+            var record = await Records.FindAsync(id);
+            if (record == null)
+                return null;
+            var result = record.Clone();
+            result.Password = PassAppEncryption.PassAppEncryption.Decrypt(record.Password);
+            return result;
+        }
         public async Task<bool> SetRecord(Record model)
         {
             try
@@ -33,7 +42,7 @@ namespace PassApp.Data
                 record.Link = model.Link;
                 record.Username = model.Username;
                 record.Email = model.Email;
-                record.Password = model.Password;
+                record.Password = PassAppEncryption.PassAppEncryption.Encrypt(model.Password);
                 record.Notes = model.Notes;
                 await SaveChangesAsync();
                 return true;
