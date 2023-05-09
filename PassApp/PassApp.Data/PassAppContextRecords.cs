@@ -12,7 +12,7 @@ namespace PassApp.Data
     {
         public DbSet<Record> Records { get; set; }
 
-        public async Task<List<string>> GetDistinctCategories() => await Records.Select(x => x.Category).Distinct().ToListAsync();
+        public async Task<List<string>> GetDistinctCategories() => await Records.Select(x => x.Category).Distinct().OrderBy(x => x.ToLower()).ToListAsync();
         public async Task<Record> GetRecord(Guid? id) => await Records.FindAsync(id);
         public async Task<Record> GetRecordForDisplay(Guid id)
         {
